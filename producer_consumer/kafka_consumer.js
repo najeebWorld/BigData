@@ -7,11 +7,6 @@ username = process.env.USERNAME
 password = process.env.PASSWORD
 topic = username + '-space'
 
-// print environment variables
-console.log('broker: ' + broker)
-console.log('username: ' + username)
-console.log('password: ' + password)
-
 // Create a new instance of the Kafka client
 const kafka = new Kafka({
     clientId: 'my-consumer',
