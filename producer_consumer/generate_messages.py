@@ -5,9 +5,18 @@ from confluent_kafka import Producer
 import time
 import redis
 import json
+import uuid
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Connect to Redis
 redis_con = redis.Redis(host='localhost', port=6379, db=0)
+
+broker = os.getenv('BROKER')
+username = os.getenv('USERNAME')
+password = os.getenv('PASSWORD')
 
 events = [
     'GRB',
@@ -47,6 +56,7 @@ def generate_message():
         'urgency': 2
     }
     """
+
     msg = {}
     msg['event'] = random_event()
     msg['source'] = random_source()
@@ -80,21 +90,52 @@ def random_ra_dec_name():
 def random_urgency():
     return random.randint(1, 5)
 
+def message_status(err, msg):
+    if err is not None:
+        print('Message staus: failed: {}'.format(err))
+    else:
+        print('Message sent to {} [{}]'.format(msg.topic(), msg.partition()))
+
 def send_msg_to_kafka(producer, msg):
-    pass
+    try:
+        producer.produce(
+            topic=username + "-space",
+            key=str(uuid.uuid4()),
+            value=json.dumps(msg).encode('utf-8'),
+            callback=message_status
+        )
+        producer.flush()
+        print("message successfully sent to kafka")
+    except Exception as e:
+        print("error while sending message to kafka")
+
+
+# def read_ccloud_config(config_file):
+#     conf = {}
+#     with open(config_file) as fh:
+#         for line in fh:
+#             line = line.strip()
+#             if len(line) != 0 and line[0] != "#":
+#                 parameter, value = line.strip().split('=', 1)
+#                 conf[parameter] = value.strip()
+#     return conf
 
 if __name__ == '__main__':
     kafka_config = {
-        'bootstrap.servers': 'localhost:9092',
-        'client.id': 'my_client_id',
-        'group.id': 'my_group_id'
+        'bootstrap.servers': broker,
+        'session.timeout.ms': 6000,
+        'default.topic.config': {'auto.offset.reset': 'smallest'},
+        'security.protocol': 'SASL_SSL',
+	    'sasl.mechanisms': 'SCRAM-SHA-256',
+        'sasl.username': username,
+        'sasl.password': password
     }
-    # producer = Producer(kafka_config)
+    producer = Producer(kafka_config)
 
     while True:
         for i in range(5):
             msg = generate_message()
-            # send_msg_to_kafka(producer, msg)
+            send_msg_to_kafka(producer, msg)
             print(msg)
         time.sleep(60)
     
