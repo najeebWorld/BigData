@@ -40,7 +40,7 @@ app.get('/getlast', async (req, res) => {
 
 app.get('/getrecent', async (req, res) => {
     console.log('Getting recent messages');
-    messages = getRecentMessages(index).then((messages) => {
+    messages = getRecentMessages().then((messages) => {
         res.json(messages);
     }).catch((error) => {
         res.status(500).json({ error: 'An error occurred' });
@@ -126,30 +126,30 @@ async function getLastMessage() {
     }
 }
 
-async function getRecentMessages(indexName) {
+async function getRecentMessages() {
     try {
-      // Search query to retrieve the most recent messages excluding the first one
-      const searchQuery = {
-        index: indexName,
-        body: {
-          size: 6, // 5 recent messages + 1 for the first one
-          sort: [
-            { '@timestamp': { order: 'desc' } }, // Sort by timestamp in descending order
-          ],
-        },
-      };
-  
-      const body = await client.search(searchQuery);
-  
-      // Exclude the first message from the result
-      const messages = body.hits.hits.slice(1).map(hit => hit._source);
-  
-      return messages;
+        // Search query to retrieve the most recent messages excluding the first one
+        const searchQuery = {
+            index: index,
+            body: {
+                size: 6, // 5 recent messages + 1 for the first one
+                sort: [
+                    { '@timestamp': { order: 'desc' } }, // Sort by timestamp in descending order
+                ],
+            },
+        };
+    
+        const body = await client.search(searchQuery);
+    
+        // Exclude the first message from the result
+        const messages = body.hits.hits.slice(1).map(hit => hit._source);
+    
+        return messages;
     } catch (error) {
-      console.error('Error retrieving recent messages:', error.message);
-      return [];
+        console.error('Error retrieving recent messages:', error.message);
+        return [];
     }
-  }
+}
 
 // Start the server
 app.listen(PORT, () => {

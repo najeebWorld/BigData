@@ -134,9 +134,8 @@ if __name__ == '__main__':
     producer = Producer(kafka_config)
 
     while True:
-        for i in range(5):
-            msg = generate_message()
-            send_msg_to_kafka(producer, msg)
-            print(msg)
-        time.sleep(60)
+        msg = generate_message()
+        send_msg_to_kafka(producer, msg)
+        print(msg)
+        time.sleep(12)
     
