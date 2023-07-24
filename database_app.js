@@ -47,6 +47,16 @@ app.get('/getrecent', async (req, res) => {
     });
 });
 
+app.get('/geteventcounts', async (req, res) => {
+    console.log('Getting event counts');
+    messages = getEventCounts().then((messages) => {
+        res.json(messages);
+    }).catch((error) => {
+        res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
+
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
 
@@ -148,6 +158,49 @@ async function getRecentMessages() {
     } catch (error) {
         console.error('Error retrieving recent messages:', error.message);
         return [];
+    }
+}
+
+async function getEventCounts() {
+    try {
+      // Aggregation query to get counts for each event type
+        const aggregationQuery = {
+            index: index,
+            body: {
+                size: 0,
+                aggs: {
+                    event_counts: {
+                        terms: {
+                            field: 'event.keyword', // Assuming the event field is not analyzed
+                            size: 5, // The number of different event types
+                        },
+                    },
+                },
+            },
+        };
+
+        const body = await client.search(aggregationQuery);
+  
+        const eventCounts = {};
+        body.aggregations.event_counts.buckets.forEach(bucket => {
+            eventCounts[bucket.key] = bucket.doc_count;
+        });
+
+        const eventTypes = ['GRB', 'Apparent Brightness Rise', 'UV Rise', 'X-Ray Rise', 'Comet'];
+        
+        const result = {};
+
+        // Fill the result object with event types and their corresponding counts
+        eventTypes.forEach(eventType => {
+            result[eventType] = eventCounts[eventType] || 0;
+        });
+
+        console.log('Event Counts:', result);
+  
+        return eventCounts;
+    } catch (error) {
+        console.error('Error getting event counts:', error.message);
+        return {};
     }
 }
 
