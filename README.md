@@ -39,6 +39,7 @@ python3 generate_messages.py
 
 ## To Start The ElasticSearch and Redis Database API:
 ```bash
+cd producer_consumer
 node database_app.js
 ```
 
