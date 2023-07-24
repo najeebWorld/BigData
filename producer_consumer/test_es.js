@@ -112,10 +112,38 @@ async function getLast() {
     }
 }
 
+async function getRecentMessages() {
+    try {
+        // Search query to retrieve the most recent messages excluding the first one
+        const searchQuery = {
+            index: index,
+            body: {
+                size: 6, // 5 recent messages + 1 for the first one
+                sort: [
+                    { '@timestamp': { order: 'desc' } }, // Sort by timestamp in descending order
+                ],
+            },
+        };
+    
+        const body = await client.search(searchQuery);
+    
+        // Exclude the first message from the result
+        const messages = body.hits.hits.slice(1).map(hit => hit._source);
+        messages.forEach((hit) => {
+            console.log(`Message: ${JSON.stringify(hit)}`);
+        });
+        return messages;
+    } catch (error) {
+        console.error('Error retrieving recent messages:', error.message);
+        return [];
+    }
+}
+
 
 // Call the function to search and retrieve documents
 // searchDocuments();
 // getMessages({ eventType: 'All', sourceType: 'All', startDate: '', endDate: ''});
 // getMessages({ eventType: 'All', sourceType: 'All' });
 // getMessagesByEvent('X-Ray Rise');
-getLast();
+// getLast();
+getRecentMessages();
