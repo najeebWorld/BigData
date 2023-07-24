@@ -1,9 +1,19 @@
 # BigData
 
+## To Pull The Elastic Search Docker:
+```bash
+docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+```
+
 ## To Run The Elastic Search Docker:
 ```bash
 docker run -d -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.14.0
- ```
+```
+
+## To Pull The Redis Docker:
+```bash
+docker pull redis
+```
 
 ## To Run The Redis Docker:
 ```bash
@@ -22,7 +32,7 @@ node producer_consumer/kafka_consumer.js
 
 ## To Start The Generator and Kafka Producer:
 ```bash
-python3 generate_messages.py
+python3 producer_consumer/generate_messages.py
 ```
 
 ## To Start The ElasticSearch and Redis Database API:
