@@ -107,7 +107,7 @@
 			    <h1 class="app-page-title">Overview</h1>
 				    
 			    <div class="row g-4 mb-4">
-				    <div class="col-6 col-lg-3">
+				    <div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">GRB</h4>
@@ -117,7 +117,7 @@
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 				    
-				    <div class="col-6 col-lg-3">
+				    <div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Apparent Brightness Rise</h4>
@@ -127,7 +127,7 @@
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 
-					<div class="col-6 col-lg-3">
+					<div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">UV Rise</h4>
@@ -137,7 +137,7 @@
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 					
-				    <div class="col-6 col-lg-3">
+				    <div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">X-Ray Rise</h4>
@@ -147,7 +147,7 @@
 					    </div><!--//app-card-->
 				    </div><!--//col-->
 
-				    <div class="col-6 col-lg-3">
+				    <div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Comet</h4>
@@ -169,55 +169,21 @@
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="table-responsive">
-							        <table class="table table-borderless mb-0">
+						        <div id="recent-events-card-container">
+									<table class="table table-striped" style="max-height: 300px; overflow-y: auto;">
 										<thead>
 											<tr>
-												<th class="meta">Time and Date</th>
-												<th class="meta stat-cell">Source</th>
-												<th class="meta stat-cell">Event Type</th>
-												<th class="meta stat-cell">Urgency Level</th>
+												<th>Time and Date</th>
+												<th>Source</th>
+												<th>Event Type</th>
+												<th>Urgency</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td><a >2023-12-4 14:35</a></td>
-												<td class="stat-cell"><a>GRB</a></td>
-												<td class="stat-cell"><a>UV Rise</a></td>
-												<td class="stat-cell"><a href="#">2</a></td>
-									            
-											</tr>
-											<tr>
-												<td><a >2023-12-4 14:35</a></td>
-												<td class="stat-cell"><a>GRB</a></td>
-												<td class="stat-cell"><a>UV Rise</a></td>
-												<td class="stat-cell"><a href="#">2</a></td>
-									            
-											</tr>
-											<tr>
-												<td><a >2023-12-4 14:35</a></td>
-												<td class="stat-cell"><a>Subaru Telescope</a></td>
-												<td class="stat-cell"><a>Comet</a></td>
-												<td class="stat-cell"><a href="#">3</a></td>
-									            
-											</tr>
-											<tr>
-												<td><a >2023-12-4 14:35</a></td>
-												<td class="stat-cell"><a>GRB</a></td>
-												<td class="stat-cell"><a>UV Rise</a></td>
-												<td class="stat-cell"><a href="#">2</a></td>
-									            
-											</tr>
-											<tr>
-												<td><a >2023-12-4 14:35</a></td>
-												<td class="stat-cell"><a>Very Large Telescope</a></td>
-												<td class="stat-cell"><a>X-Ray Rise</a></td>
-												<td class="stat-cell"><a href="#">3</a></td>
-									            
-											</tr>
+										<tbody id="recent-events-table-body">
+											<!-- This is where the search results table will be generated -->
 										</tbody>
 									</table>
-						        </div><!--//table-responsive-->
+								</div><!--//result-card-container-->
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
 				        
@@ -368,9 +334,9 @@
 									</table>
 						        </div><!--//table-responsive-->
 					        </div><!--//app-card-body-->
-				        </div><!--//app-card-->
-				        
+				        </div><!--//app-card-->   
 			        </div><!--//col-->
+					
 			        <div class="col-12 col-lg-6">
 						<div class="app-card app-card-stats-table h-100 shadow-sm">
 					        <div class="app-card-header p-3">
@@ -421,7 +387,6 @@
 				        </div><!--//app-card-->
 				        
 			        </div><!--//col-->
-			        
 			    </div><!--//row-->
 
 			    <div class="row g-4 mb-4">
@@ -498,6 +463,52 @@
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script> 
 
+	<script>
+		// Function to fetch the latest event data from the server
+		function fetchLatestEvent() {
+			const tableBody = document.getElementById('recent-events-table-body');
+			tableBody.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+			const url = 'http://localhost:3001/getrecent';
+			fetch(url)
+				.then(response => response.json())
+				.then((results) => {
+					console.log(results.length);
+					// Clear the table body
+					tableBody.innerHTML = '';
+
+					// Loop through each result and add it to the table
+					results.forEach((result) => {
+						console.log(result);
+						const row = document.createElement('tr');
+						
+						const timeAndDate = document.createElement('td');
+						timeAndDate.textContent = result.timeAndDate;
+						row.appendChild(timeAndDate);
+
+						const source = document.createElement('td');
+						source.textContent = result.source;
+						row.appendChild(source);
+
+						const eventType = document.createElement('td');
+						eventType.textContent = result.eventType;
+						row.appendChild(eventType);
+
+						const urgency = document.createElement('td');
+						urgency.textContent = result.urgency;
+						row.appendChild(urgency);
+
+						tableBody.appendChild(row);
+					});
+				})
+				.catch((error) => {
+					console.log(error);
+					tableBody.innerHTML = '<tr><td colspan="4">An error occurred while fetching results.</td></tr>';
+				});
+		}
+		// Call the function to fetch and display the latest event data
+		fetchLatestEvent();
+	</script>
 	<script>
 		// Get the canvas element
 		var canvas = document.getElementById('chart-pie-urgency');

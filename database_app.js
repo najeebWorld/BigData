@@ -29,6 +29,24 @@ app.get('/search', async (req, res) => {
     });
 });
 
+app.get('/getlast', async (req, res) => {
+    console.log('Getting last recieved message');
+    messages = getLastMessage().then((message) => {
+        res.json(message);
+    }).catch((error) => {
+        res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
+app.get('/getrecent', async (req, res) => {
+    console.log('Getting recent messages');
+    messages = getRecentMessages(index).then((messages) => {
+        res.json(messages);
+    }).catch((error) => {
+        res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
 
@@ -86,6 +104,52 @@ async function getMessages(options) {
         return [];
     }
 }
+
+async function getLastMessage() {
+    try {
+        // Search for the last document in the index sorted by the timestamp field in descending order
+        const body = await client.search({
+            index: index,
+            size: 1,
+            body: {
+                sort: [{ '@timestamp': 'desc' }], // Replace '@timestamp' with your timestamp field name
+            },
+        });
+    
+        // Extract the last message from the Elasticsearch response
+        const lastMessage = body.hits.hits[0]._source; // Assumes that the message is stored in the '_source' field
+    
+        return lastMessage;
+    } catch (error) {
+        console.error('Error retrieving the last message from Elasticsearch:', error);
+        return null;
+    }
+}
+
+async function getRecentMessages(indexName) {
+    try {
+      // Search query to retrieve the most recent messages excluding the first one
+      const searchQuery = {
+        index: indexName,
+        body: {
+          size: 6, // 5 recent messages + 1 for the first one
+          sort: [
+            { '@timestamp': { order: 'desc' } }, // Sort by timestamp in descending order
+          ],
+        },
+      };
+  
+      const body = await client.search(searchQuery);
+  
+      // Exclude the first message from the result
+      const messages = body.hits.hits.slice(1).map(hit => hit._source);
+  
+      return messages;
+    } catch (error) {
+      console.error('Error retrieving recent messages:', error.message);
+      return [];
+    }
+  }
 
 // Start the server
 app.listen(PORT, () => {
