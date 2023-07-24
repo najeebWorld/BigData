@@ -75,7 +75,7 @@ def random_source():
 def random_date():
     curr_date = datetime.datetime.now(pytz.utc)
     delta = datetime.timedelta(days=random.randint(0, 30), hours=random.randint(0, 24), minutes=random.randint(0, 60), seconds=random.randint(0, 60))
-    return (curr_date + delta).strftime('%Y-%m-%d %H:%M:%S %Z')
+    return (curr_date - delta).strftime('%Y-%m-%d %H:%M:%S %Z')
 
 def random_ra_dec_name():
     # ra = random.randint(0, 360)
