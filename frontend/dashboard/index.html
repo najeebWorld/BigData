@@ -173,7 +173,7 @@
 									<table class="table table-striped" style="max-height: 300px; overflow-y: auto;">
 										<thead>
 											<tr>
-												<th>Time and Date</th>
+												<th>Date and Time </th>
 												<th>Source</th>
 												<th>Event Type</th>
 												<th>Urgency</th>
@@ -198,60 +198,14 @@
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="table-responsive">
+						        <div class="event-info">
 							        <table class="table table-borderless mb-0">
 										<div class="row g-4 mb-4 justify-content-around">
 											<div class="col-6 col-lg-4">
 												<div class="app-card app-card-stat shadow-sm h-100">
 													<div class="app-card-body p-3 p-lg-4">
-														<h4 class="stats-type mb-1">Urgency</h4>
-														<div class="stats-figure" style="font-size:20px; line-height: 1.2;">5</div>
-													</div><!--//app-card-body-->
-													<a class="app-card-link-mask" href="#"></a>
-												</div><!--//app-card-->
-											</div><!--//col-->
-
-											<div class="col-6 col-lg-4">
-												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
-														<h4 class="stats-type mb-1">Date and Time</h4>
-														<div class="stats-figure" style="font-size:15px; line-height: 1.2;">2023-07-13 12:09</div>
-													</div><!--//app-card-body-->
-													<a class="app-card-link-mask" href="#"></a>
-												</div><!--//app-card-->
-											</div><!--//col-->
-										</div><!--//row-->
-
-							
-								
-										<div class="row g-4 mb-4 justify-content-around">
-											<div class="col-6 col-lg-4">
-												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
-														<h4 class="stats-type mb-1">RA</h4>
-														<div class="stats-figure" style="font-size:20px; line-height: 1.2;">11111</div>
-													</div><!--//app-card-body-->
-													<a class="app-card-link-mask" href="#"></a>
-												</div><!--//app-card-->
-											</div><!--//col-->
-								
-											<div class="col-6 col-lg-4">
-												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
-														<h4 class="stats-type mb-1">DEC</h4>
-														<div class="stats-figure" style="font-size:20px; line-height: 1.2;">11111</div>
-													</div><!--//app-card-body-->
-													<a class="app-card-link-mask" href="#"></a>
-												</div><!--//app-card-->
-											</div><!--//col-->
-										</div><!--//row-->
-
-										<div class="row g-4 mb-4 justify-content-around">
-											<div class="col-6 col-lg-4">
-												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
 														<h4 class="stats-type mb-1">Event Type</h4>
-														<div class="stats-figure" style="font-size:20px; line-height: 1.2;">Comet</div>
+														<div id ="event-type-latest"></div>
 													</div><!--//app-card-body-->
 													<a class="app-card-link-mask" href="#"></a>
 												</div><!--//app-card-->
@@ -261,7 +215,7 @@
 												<div class="app-card app-card-stat shadow-sm h-100">
 													<div class="app-card-body p-3 p-lg-4">
 														<h4 class="stats-type mb-1">Name</h4>
-														<div class="stats-figure" style="font-size:20px; line-height: 1.2;">Comet</div>
+														<div id= "name-latest"></div>
 													</div><!--//app-card-body-->
 													<a class="app-card-link-mask" href="#"></a>
 												</div><!--//app-card-->
@@ -271,12 +225,54 @@
 												<div class="app-card app-card-stat shadow-sm h-100">
 													<div class="app-card-body p-3 p-lg-4">
 														<h4 class="stats-type mb-1">Source</h4>
-														<div class="stats-figure" style="font-size:20px; line-height: 1.2;">Very Large Telescope</div>
+														<div id="source-latest"></div>
 													</div><!--//app-card-body-->
 													<a class="app-card-link-mask" href="#"></a>
 												</div><!--//app-card-->
 											</div><!--//col-->
-									
+										</div><!--//row-->
+										<div class="row g-4 mb-4 justify-content-around">
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-4">
+														<h4 class="stats-type mb-1">Urgency</h4>
+														<div id="urgency-latest"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-4">
+														<h4 class="stats-type mb-1">Date and Time</h4>
+														<div id="date-latest"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+										</div><!--//row-->
+
+										<div class="row g-4 mb-4 justify-content-around">
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-4">
+														<h4 class="stats-type mb-1">RA</h4>
+														<div id="ra-latest"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+								
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-4">
+														<h4 class="stats-type mb-1">DEC</h4>
+														<div id="dec-latest"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
 										</div><!--//row-->
 									</table>
 						        </div><!--//table-responsive-->
@@ -465,7 +461,7 @@
 
 	<script>
 		// Function to fetch the latest event data from the server
-		function fetchLatestEvent() {
+		function fetchRecentEvents() {
 			const tableBody = document.getElementById('recent-events-table-body');
 			tableBody.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
 
@@ -483,7 +479,7 @@
 						const row = document.createElement('tr');
 						
 						const timeAndDate = document.createElement('td');
-						timeAndDate.textContent = result.timeAndDate;
+						timeAndDate.textContent = result.date;
 						row.appendChild(timeAndDate);
 
 						const source = document.createElement('td');
@@ -491,11 +487,19 @@
 						row.appendChild(source);
 
 						const eventType = document.createElement('td');
-						eventType.textContent = result.eventType;
+						eventType.textContent = result.event;
 						row.appendChild(eventType);
 
 						const urgency = document.createElement('td');
 						urgency.textContent = result.urgency;
+
+						// change color of urgency
+						if(result.urgency <= 3){
+							urgency.style.color = "green";
+						}
+						else{
+							urgency.style.color = "red";
+						}
 						row.appendChild(urgency);
 
 						tableBody.appendChild(row);
@@ -507,7 +511,51 @@
 				});
 		}
 		// Call the function to fetch and display the latest event data
+		fetchRecentEvents();
+	</script>
+	
+	<script>
+		// function to fetch most recent event and display it in Latest Event
+		function fetchLatestEvent() {
+			const url = 'http://localhost:3001/getlast';
+			fetch(url)
+			.then(response => response.json())
+			.then((result) => {
+					console.log(result);
+				const eventType = document.getElementById('event-type-latest');
+				eventType.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.event + '</h4></div>';
+
+				const name = document.getElementById('name-latest');
+				name.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.name + '</h4></div>';
+
+				const source = document.getElementById('source-latest');
+				source.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.source + '</h4></div>';
+
+				const urgency = document.getElementById('urgency-latest');
+				if(result.urgency <= 3){
+					urgency.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.urgency + '</h4></div>';
+				}
+				else{
+					urgency.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.urgency + '</h4></div>';
+				}
+
+				const date = document.getElementById('date-latest');
+				date.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.date + '</h4></div>';
+
+				const ra = document.getElementById('ra-latest');
+				ra.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.ra + '</h4></div>';
+
+				const dec = document.getElementById('dec-latest');
+				dec.innerHTML = '<div class="app-card-body p-3 p-lg-4"><h4 class="stats-type mb-1">' + result.dec + '</h4></div>';
+
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		}
+		// Call the function to fetch and display the latest event data
 		fetchLatestEvent();
+		
 	</script>
 	<script>
 		// Get the canvas element
