@@ -59,9 +59,13 @@ const esClient = new Client({
 // Index the document
 async function indexDocument(message) {
     try {
+        // Add a timestamp to the message object
+        const timestamp = new Date().toISOString();
+        const indexedDoc = { ...message, '@timestamp': timestamp };
+
         const response = await esClient.index({
             index: 'space',
-            body: message,
+            body: indexedDoc,
         });
         console.log(`Document indexed successfully. ID: ${response.body._id}`);
     } catch (error) {

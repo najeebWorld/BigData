@@ -82,7 +82,7 @@ async function getMessages(options) {
         console.log(`Retrieved ${response.hits.total.value} messages`);
         console.log(response.hits.total.value);
         response.hits.hits.forEach((hit) => {
-            console.log(`Message: ${JSON.stringify(hit._source)}`);
+            console.log(`Message: ${JSON.stringify(hit)}`);
         });
         return response.hits.hits.map((hit) => hit._source);
     } catch (error) {
@@ -91,9 +91,31 @@ async function getMessages(options) {
     }
 }
 
+async function getLast() {
+    try {
+        // Search for the last document in the index sorted by the timestamp field in descending order
+        const body = await client.search({
+            index: index,
+            size: 1,
+            body: {
+                sort: [{ '@timestamp': 'desc' }], // Replace '@timestamp' with your timestamp field name
+            },
+        });
+    
+        // Extract the last message from the Elasticsearch response
+        const lastMessage = body.hits.hits[0]._source; // Assumes that the message is stored in the '_source' field
+        console.log(lastMessage);
+        return lastMessage;
+    } catch (error) {
+        console.error('Error retrieving the last message from Elasticsearch:', error);
+        return null;
+    }
+}
+
 
 // Call the function to search and retrieve documents
 // searchDocuments();
-getMessages({ eventType: 'All', sourceType: 'All', startDate: '2023-08-01', endDate: '2023-08-31'});
+// getMessages({ eventType: 'All', sourceType: 'All', startDate: '', endDate: ''});
 // getMessages({ eventType: 'All', sourceType: 'All' });
 // getMessagesByEvent('X-Ray Rise');
+getLast();
