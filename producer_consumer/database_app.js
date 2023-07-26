@@ -3,6 +3,7 @@ const cors = require('cors');
 const { Client } = require('@elastic/elasticsearch');
 require('dotenv').config();
 const axios = require('axios');
+const cheerio = require('cheerio');
 
 const app = express();
 
@@ -192,6 +193,32 @@ app.get('/getneodistribution', async (req, res) => {
 
     res.json(neoSizes);
 });
+
+app.get('/sunspots', async (req, res) => {
+    try {
+      const websiteURL = 'https://theskylive.com/sun-info';
+      const page = await axios.get(websiteURL);
+      const $ = cheerio.load(page.data);
+  
+      const table = $('div.sun_container');
+      const image_url = table.find('img').attr('src');
+  
+      const absolute_image_url = new URL(image_url, websiteURL).toString();
+  
+      // Fetch the image from the absolute URL
+      const imageResponse = await axios.get(absolute_image_url, { responseType: 'arraybuffer' });
+  
+      // Set the appropriate headers for the image response
+      res.set('Content-Type', 'image/jpeg');
+      res.set('Content-Disposition', 'inline');
+  
+      // Send the image data in the response
+      res.send(Buffer.from(imageResponse.data));
+    } catch (error) {
+      console.error('Error:', error.message);
+      res.status(500).send('Failed to fetch the image.');
+    }
+  });
 
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
