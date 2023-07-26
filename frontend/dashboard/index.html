@@ -36,14 +36,33 @@
 		@keyframes urgencyAnimation {
 			0% {
 				opacity: 0.8;
+				transform: scale(1);
 			}
 			50% {
 				opacity: 1;
+				transform: scale(1.1);
 			}
 			100% {
 				opacity: 0.8;
+				transform: scale(1);
 			}
 		}
+
+        /* Change text color */
+        .stats-type.mb-1{
+            color: #16587b; 
+        }
+
+		/* Change background color */
+        .app-card-header.p-3 {
+            background-color: #16587b; /* Replace with your desired background color */
+        }
+
+        /* Change text color */
+        .app-card-header.p-3 h4 {
+            color: white; /* Replace with your desired text color */
+        }
+
 	</style>
 </head> 
 
@@ -210,7 +229,7 @@
 			        <div class="col-12 col-lg-6">
 						<div class="app-card app-card-stats-table h-100 shadow-sm">
 					        <div class="app-card-header p-3">
-						        <div class="row justify-content-around">
+						        <div class="row justify-content-between align-items-center">
 							        <div class="col-auto">
 						                <h4 class="app-card-title">Latest Event</h4>
 							        </div><!--//col-->
@@ -311,96 +330,53 @@
 							        </div><!--//col-->
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
-					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="table-responsive">
-							        <table class="table table-borderless mb-0">
+							<div class="app-card-body p-3 p-lg-4">
+						        <div id="recent-events-card-container">
+									<table class="table table-striped" style="max-height: 300px; overflow-y: auto;">
 										<thead>
 											<tr>
-												<th class="meta">Name</th>
-												<th class="meta stat-cell">Reference ID</th>
-												<th class="meta stat-cell">Hazardess</th>
-												<th class="meta stat-cell">Velocity</th>
-												<th class="meta stat-cell">Miss Distance</th>
+												<th>Name </th>
+												<th>Reference ID</th>
+												<th>Hazardess</th>
+												<th>Miss Distance (KM)</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td class="stat-cell"><a>Name 1</a></td>
-												<td class="stat-cell"><a>Reference # 1</a></td>
-												<td class="stat-cell"><a>Hazardess 1</a></td>
-												<td class="stat-cell"><a>Velocity 1</a></td>
-												<th class="meta stat-cell">Miss Distance 1</th>
-											</tr>
-											<tr>
-												<td class="stat-cell"><a>Name 2</a></td>
-												<td class="stat-cell"><a>Reference # 2</a></td>
-												<td class="stat-cell"><a>Hazardess 2</a></td>
-												<td class="stat-cell"><a>Velocity 2</a></td>
-												<th class="meta stat-cell">Miss Distance 2</th>
-											</tr>
-											<tr>
-												<td class="stat-cell"><a>Name 3</a></td>
-												<td class="stat-cell"><a>Reference # 3</a></td>
-												<td class="stat-cell"><a>Hazardess 3</a></td>
-												<td class="stat-cell"><a>Velocity 3</a></td>
-												<th class="meta stat-cell">Miss Distance 3</th>
-											</tr>
+										<tbody id="neo-last-24-table-body">
+											<!-- This is where the search results table will be generated -->
 										</tbody>
 									</table>
-						        </div><!--//table-responsive-->
+								</div><!--//result-card-container-->
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->   
 			        </div><!--//col-->
-					
-			        <div class="col-12 col-lg-6">
+
+					<div class="col-12 col-lg-6">
 						<div class="app-card app-card-stats-table h-100 shadow-sm">
 					        <div class="app-card-header p-3">
 						        <div class="row justify-content-between align-items-center">
 							        <div class="col-auto">
-						                <h4 class="app-card-title">Near Earth Objects in the Next 24H</h4>
+						                <h4 class="app-card-title">Near Earth Objects in Next 24H</h4>
 							        </div><!--//col-->
 						        </div><!--//row-->
 					        </div><!--//app-card-header-->
-					        <div class="app-card-body p-3 p-lg-4">
-						        <div class="table-responsive">
-							        <table class="table table-borderless mb-0">
+							<div class="app-card-body p-3 p-lg-4">
+						        <div id="recent-events-card-container">
+									<table class="table table-striped" style="max-height: 300px; overflow-y: auto;">
 										<thead>
 											<tr>
-												<th class="meta">Name</th>
-												<th class="meta stat-cell">Reference ID</th>
-												<th class="meta stat-cell">Hazardess</th>
-												<th class="meta stat-cell">Velocity</th>
-												<th class="meta stat-cell">Miss Distance</th>
+												<th>Name </th>
+												<th>Reference ID</th>
+												<th>Hazardess</th>
+												<th>Miss Distance (KM)</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td class="stat-cell"><a>Name 1</a></td>
-												<td class="stat-cell"><a>Reference # 1</a></td>
-												<td class="stat-cell"><a>Hazardess 1</a></td>
-												<td class="stat-cell"><a>Velocity 1</a></td>
-												<th class="meta stat-cell">Miss Distance 1</th>
-											</tr>
-											<tr>
-												<td class="stat-cell"><a>Name 2</a></td>
-												<td class="stat-cell"><a>Reference # 2</a></td>
-												<td class="stat-cell"><a>Hazardess 2</a></td>
-												<td class="stat-cell"><a>Velocity 2</a></td>
-												<th class="meta stat-cell">Miss Distance 2</th>
-											</tr>
-											<tr>
-												<td class="stat-cell"><a>Name 3</a></td>
-												<td class="stat-cell"><a>Reference # 3</a></td>
-												<td class="stat-cell"><a>Hazardess 3</a></td>
-												<td class="stat-cell"><a>Velocity 3</a></td>
-												<th class="meta stat-cell">Miss Distance 3</th>
-											</tr>
+										<tbody id="neo-next-24-table-body">
+											<!-- This is where the search results table will be generated -->
 										</tbody>
 									</table>
-						        </div><!--//table-responsive-->
+								</div><!--//result-card-container-->
 					        </div><!--//app-card-body-->
-				        </div><!--//app-card-->
-				        
+				        </div><!--//app-card-->   
 			        </div><!--//col-->
 			    </div><!--//row-->
 
@@ -442,7 +418,7 @@
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-4">					   
 						        <div class="chart-container">
-				                    <canvas id="chart-pie-urgency" ></canvas>
+				                    <canvas id="chart-stacked-urgency" ></canvas>
 						        </div>
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
@@ -607,17 +583,37 @@
 
 	<script>
 		// Get the canvas element
-		var canvas = document.getElementById('chart-pie-urgency');
+		var canvas = document.getElementById('chart-stacked-urgency');
 	
-		// Create the chart using Chart.js
+		// Create stacked-bar chart using Chart.js
 		var chart = new Chart(canvas, {
-			type: 'pie',
+			type: 'bar',
 			data: {
 				labels: ['GRB', 'Apparent Brightness Rise', 'UV Rise', 'X-Ray Rise', 'Comet'], // Array of labels for each data point
 				datasets: [{
-					label: 'Dataset',
+					label: '1',
 					data: [10, 42, 28, 5, 15], // Array of data values for each data point
-					backgroundColor: ['red', 'blue', 'green', 'yellow', 'purple'], // Array of colors for each data point
+					backgroundColor: 'yellow', // Array of colors for each data point
+				},
+				{
+					label: '2',
+					data: [10, 42, 28, 5, 15], // Array of data values for each data point
+					backgroundColor: 'blue', // Array of colors for each data point
+				},
+				{
+					label: '3',
+					data: [10, 42, 28, 5, 15], // Array of data values for each data point
+					backgroundColor: 'green', // Array of colors for each data point
+				},
+				{
+					label: '4',
+					data: [10, 42, 28, 5, 15], // Array of data values for each data point
+					backgroundColor: 'orange', // Array of colors for each data point
+				},
+				{
+					label: '5',
+					data: [10, 42, 28, 5, 15], // Array of data values for each data point
+					backgroundColor: 'red', // Array of colors for each data point
 				}]
 			},
 			options: {
@@ -645,6 +641,89 @@
 			}
 		});
 	</script>
+
+	<script>
+		// Function to fetch neo in last and next 24 hours
+		function fetchNEOS() {
+			const tableBodyLast = document.getElementById('neo-last-24-table-body');
+			tableBodyLast.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+			const tableBodyNext = document.getElementById('neo-next-24-table-body');
+			tableBodyNext.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+			const url = 'http://localhost:3001/getneos';
+			fetch(url)
+				.then(response => response.json())
+				.then((results) => {
+					console.log(results.length);
+					// Clear the table body
+					tableBodyLast.innerHTML = '';
+					tableBodyNext.innerHTML = '';
+
+					// Loop through each result and add it to the table
+					results["last"].forEach((result) => {
+						console.log(result);
+
+						// last 24 hours
+						const rowLast = document.createElement('tr');
+						
+						const nameLast = document.createElement('td');
+						nameLast.textContent = result["name"];
+						rowLast.appendChild(nameLast);
+
+						const referenceIDLast = document.createElement('td');
+						referenceIDLast.textContent = result["neo_reference_id"];
+						rowLast.appendChild(referenceIDLast);
+
+						const hazardessLast = document.createElement('td');
+						hazardessLast.textContent = result["is_potentially_hazardous_asteroid"];
+						rowLast.appendChild(hazardessLast);
+
+						const missDistanceLast = document.createElement('td');
+						result["close_approach_data"].forEach((closeApproach) => {
+							missDistanceLast.textContent = closeApproach["miss_distance"]["kilometers"];
+						});
+						rowLast.appendChild(missDistanceLast);
+
+						tableBodyLast.appendChild(rowLast);
+					});
+
+					// next 24 hours
+					results["last"].forEach((result) => {
+						console.log(result);
+						const rowNext = document.createElement('tr');
+
+						const nameNext = document.createElement('td');
+						nameNext.textContent = result["name"];
+						rowNext.appendChild(nameNext);
+
+						const referenceIDNext = document.createElement('td');
+						referenceIDNext.textContent = result["neo_reference_id"];
+						rowNext.appendChild(referenceIDNext);
+
+						const hazardessNext = document.createElement('td');
+						hazardessNext.textContent = result["is_potentially_hazardous_asteroid"];
+						rowNext.appendChild(hazardessNext);
+
+						const missDistanceNext = document.createElement('td');
+						result["close_approach_data"].forEach((closeApproach) => {
+							missDistanceNext.textContent = closeApproach["miss_distance"]["kilometers"];
+						});
+						rowNext.appendChild(missDistanceNext);
+
+						tableBodyNext.appendChild(rowNext);
+					});
+				})
+				.catch((error) => {
+					console.log(error);
+					tableBodyLast.innerHTML = '<tr><td colspan="4">An error occurred while fetching results.</td></tr>';
+					tableBodyNext.innerHTML = '<tr><td colspan="4">An error occurred while fetching results.</td></tr>';
+				});
+		}
+		// Call the function to fetch and display the near earth objects data
+		fetchNEOS();
+	</script>
+
 	<script>
 		// Get the canvas element
 		var canvas = document.getElementById('chart-line-radiation');
