@@ -721,46 +721,7 @@
 		fetchUrgencyDistribution();
 	</script> -->
 
-	<script>
-		// Get the canvas element
-		var canvas = document.getElementById('chart-stacked-urgency');
-	
-		// Create stacked-bar chart using Chart.js
-		var chart = new Chart(canvas, {
-			type: 'bar',
-			data: {
-				labels: ['GRB', 'Apparent Brightness Rise', 'UV Rise', 'X-Ray Rise', 'Comet'], // Array of labels for each data point
-				datasets: [{
-					label: '1',
-					data: [10, 42, 28, 5, 15], // Array of data values for each data point
-					backgroundColor: 'yellow', // Array of colors for each data point
-				},
-				{
-					label: '2',
-					data: [10, 42, 28, 5, 15], // Array of data values for each data point
-					backgroundColor: 'blue', // Array of colors for each data point
-				},
-				{
-					label: '3',
-					data: [10, 42, 28, 5, 15], // Array of data values for each data point
-					backgroundColor: 'green', // Array of colors for each data point
-				},
-				{
-					label: '4',
-					data: [10, 42, 28, 5, 15], // Array of data values for each data point
-					backgroundColor: 'orange', // Array of colors for each data point
-				},
-				{
-					label: '5',
-					data: [10, 42, 28, 5, 15], // Array of data values for each data point
-					backgroundColor: 'red', // Array of colors for each data point
-				}]
-			},
-			options: {
-				// Chart options here (e.g., title, legend, etc.)
-			}
-		});
-	</script>
+
 	<script>
 		// Get the canvas element
 		var canvas = document.getElementById('chart-pie-size');
