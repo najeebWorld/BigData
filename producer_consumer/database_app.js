@@ -90,7 +90,7 @@ app.get('/geteventdistribution', async (req, res) => {
     const oneWeekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000)
     // Get all the messages from the last week
     const messages = await getMessages({ startDate: oneWeekAgo.toISOString().split('T')[0], endDate: currentDate.toISOString().split('T')[0] });
-    // Make distribution based on events
+    // Make distribution based on urgency
     const eventDistribution = {
         'GRB': {
             1: 0,
@@ -134,22 +134,64 @@ app.get('/geteventdistribution', async (req, res) => {
     res.json(eventDistribution);
 });
 
-// app.get('/getneodistribution', async (req, res) => {
-//     // Get the current date and time
-//     const currentDate = new Date();
-//     // Get the date and time for exactly 1 month ago, split in to 4 weeks
-//     const oneWeekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000)
-//     const twoWeeksAgo = new Date(currentDate.getTime() - 14 * 24 * 60 * 60 * 1000)
-//     const threeWeeksAgo = new Date(currentDate.getTime() - 21 * 24 * 60 * 60 * 1000)
-//     const oneMonthAgo = new Date(currentDate.getTime() - 30 * 24 * 60 * 60 * 1000)
-//     // Get all the messages from the last month
-//     const neos_one_week_ago = await getNEOs(oneWeekAgo.toISOString().split('T')[0], currentDate.toISOString().split('T')[0]);
-//     const neos_two_weeks_ago = await getNEOs(twoWeeksAgo.toISOString().split('T')[0], oneWeekAgo.toISOString().split('T')[0]);
-//     const neos_three_weeks_ago = await getNEOs(threeWeeksAgo.toISOString().split('T')[0], twoWeeksAgo.toISOString().split('T')[0]);
-//     const neos_one_month_ago = await getNEOs(oneMonthAgo.toISOString().split('T')[0], threeWeeksAgo.toISOString().split('T')[0]);
+app.get('/getneodistribution', async (req, res) => {
+    // Get the current date and time and the date and time for exactly 1 week ago
+    const week_one_1 = new Date();
+    const week_one_2 = new Date(week_one_1.getTime() - 7 * 24 * 60 * 60 * 1000)
+    // Get next window by week 
+    const week_two_1 = new Date(week_one_2.getTime() - 1 * 24 * 60 * 60 * 1000)
+    const week_two_2 = new Date(week_two_1.getTime() - 7 * 24 * 60 * 60 * 1000)
+    // Get next window by week
+    const week_three_1 = new Date(week_two_2.getTime() - 1 * 24 * 60 * 60 * 1000)
+    const week_three_2 = new Date(week_three_1.getTime() - 7 * 24 * 60 * 60 * 1000)
+    // Get next window by week
+    const week_four_1 = new Date(week_three_2.getTime() - 1 * 24 * 60 * 60 * 1000)
+    const week_four_2 = new Date(week_four_1.getTime() - 7 * 24 * 60 * 60 * 1000)
+    
+    // print all dates
+    // console.log(`Getting NEOs between ${week_one_2.toISOString().split('T')[0]} and ${week_one_1.toISOString().split('T')[0]}`);
+    // console.log(`Getting NEOs between ${week_two_2.toISOString().split('T')[0]} and ${week_two_1.toISOString().split('T')[0]}`);
+    // console.log(`Getting NEOs between ${week_three_2.toISOString().split('T')[0]} and ${week_three_1.toISOString().split('T')[0]}`);
+    // console.log(`Getting NEOs between ${week_four_2.toISOString().split('T')[0]} and ${week_four_1.toISOString().split('T')[0]}`);    
 
+    const neoList1 = await getNEOs(week_one_2.toISOString().split('T')[0], week_one_1.toISOString().split('T')[0]);
+    const neoList2 = await getNEOs(week_two_2.toISOString().split('T')[0], week_two_1.toISOString().split('T')[0]);
+    const neoList3 = await getNEOs(week_three_2.toISOString().split('T')[0], week_three_1.toISOString().split('T')[0]);
+    const neoList4 = await getNEOs(week_four_2.toISOString().split('T')[0], week_four_1.toISOString().split('T')[0]);
 
-// });
+    // make distribution by size of neo
+    const neoSizes = []
+
+    Object.keys(neoList1).forEach((key) => {
+        neoList1[key].forEach((neo) => {
+            // add the avg between min and max size
+            neoSizes.push((neo.estimated_diameter.meters.estimated_diameter_min + neo.estimated_diameter.meters.estimated_diameter_max) / 2)
+        })
+    })
+    Object.keys(neoList2).forEach((key) => {
+        neoList2[key].forEach((neo) => {
+            // add the avg between min and max size
+            neoSizes.push((neo.estimated_diameter.meters.estimated_diameter_min + neo.estimated_diameter.meters.estimated_diameter_max) / 2)
+        })
+    })
+    Object.keys(neoList3).forEach((key) => {
+        neoList3[key].forEach((neo) => {
+            // add the avg between min and max size
+            neoSizes.push((neo.estimated_diameter.meters.estimated_diameter_min + neo.estimated_diameter.meters.estimated_diameter_max) / 2)
+        })
+    })
+    Object.keys(neoList4).forEach((key) => {
+        neoList4[key].forEach((neo) => {
+            // add the avg between min and max size
+            neoSizes.push((neo.estimated_diameter.meters.estimated_diameter_min + neo.estimated_diameter.meters.estimated_diameter_max) / 2)
+        })
+    })
+
+    // sort the sizes
+    neoSizes.sort((a, b) => a - b);
+
+    res.json(neoSizes);
+});
 
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
