@@ -78,8 +78,6 @@ def random_date():
     return (curr_date - delta).strftime('%Y-%m-%d %H:%M:%S %Z')
 
 def random_ra_dec_name():
-    # ra = random.randint(0, 360)
-    # dec = random.randint(-90, 90)
     star_id = random.randint(1, 9096)
     star = redis_con.hget('BSC', star_id)
     star = json.loads(star)
@@ -110,16 +108,6 @@ def send_msg_to_kafka(producer, msg):
     except Exception as e:
         print("error while sending message to kafka")
 
-
-# def read_ccloud_config(config_file):
-#     conf = {}
-#     with open(config_file) as fh:
-#         for line in fh:
-#             line = line.strip()
-#             if len(line) != 0 and line[0] != "#":
-#                 parameter, value = line.strip().split('=', 1)
-#                 conf[parameter] = value.strip()
-#     return conf
 
 if __name__ == '__main__':
     kafka_config = {

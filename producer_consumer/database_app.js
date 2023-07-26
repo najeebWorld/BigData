@@ -83,6 +83,57 @@ app.get('/getneos', async (req, res) => {
     res.json(neos);
 });
 
+app.get('/geteventdistribution', async (req, res) => {
+    // Get the current date and time
+    const currentDate = new Date();
+    // Get the date and time for exactly 1 week ago
+    const oneWeekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000)
+    // Get all the messages from the last week
+    const messages = await getMessages({ startDate: oneWeekAgo.toISOString().split('T')[0], endDate: currentDate.toISOString().split('T')[0] });
+    // Make distribution based on events
+    const eventDistribution = {
+        'GRB': {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0
+        },
+        'Apparent Brightness Rise': {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0
+        },
+        'UV Rise': {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0
+        },
+        'X-Ray Rise': {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0
+        },
+        'Comet': {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0
+        }
+    };
+    messages.forEach((message) => {
+        eventDistribution[message.event][message.source] += 1;
+    });
+    res.json(eventDistribution);
+});
+
 
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
