@@ -584,6 +584,146 @@
 	<script>
 		// Get the canvas element
 		var canvas = document.getElementById('chart-stacked-urgency');
+
+		// Function to fetch data from the server
+		function fetchUrgencyDist() {
+			const url = 'http://localhost:3001/geteventdistribution';
+			fetch(url)
+				.then((response) => response.json())
+				.then((data) => {
+					// Call the function to create the chart
+					createStackedBarChart(data);
+				})
+				.catch((error) => {
+					console.error('Error fetching data:', error);
+				});
+		}
+
+		// Function to create the stacked bar chart
+		function createStackedBarChart(data) {
+        var labels = Object.keys(data);
+        var urgencyLevels = ['1', '2', '3', '4', '5'];
+
+        var datasets = urgencyLevels.map((urgency) => ({
+            label: urgency,
+            data: labels.map((eventType) => data[eventType][urgency] || 0),
+            backgroundColor: getUrgencyColor(urgency),
+        }));
+
+        var ctx = document.getElementById('chart-stacked-urgency').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: datasets,
+            },
+            options: {
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                    },
+                },
+            },
+        });
+    }
+
+    // Function to get urgency color based on urgency level
+    function getUrgencyColor(urgency) {
+        switch (urgency) {
+            case '1':
+                return 'yellow';
+            case '2':
+                return 'blue';
+            case '3':
+                return 'green';
+            case '4':
+                return 'orange';
+            case '5':
+                return 'red';
+            default:
+                return 'gray';
+        }
+    }
+
+		// Call the fetchData function to fetch data and create the chart
+		console.log("fetching urgency distribution");
+		fetchUrgencyDist();
+		console.log("worked");
+	</script>
+	<!-- <script>
+		function fetchUrgencyDistribution(){
+			const url = 'http://localhost:3001/geteventdistribution';
+			fetch(url)
+			.then(response => response.json())
+			.then((result) => {
+				console.log("urgency distribution:" + result);
+				const eventData = result; // Assuming the response is an array of objects with event data
+				const eventTypes = result.map((event) => event.eventType);
+				const urgencies = [1, 2, 3, 4, 5]; // Assuming urgency levels 1 to 5
+
+				const chartCanvas = document.getElementById('chart-stacked-urgency');
+				const ctx = chartCanvas.getContext('2d');
+
+				// Prepare the datasets for the chart
+				const datasets = urgencies.map((urgency, index) => {
+					const dataValues = eventData.map((event) => event.urgencies[index]);
+					const backgroundColor = getRandomColor(); // Helper function to generate random colors
+					return {
+						label: urgency.toString(),
+						data: dataValues,
+						backgroundColor: backgroundColor,
+					};
+				});
+
+				// Create the Stacked Bar Chart
+				new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels: eventTypes,
+						datasets: datasets,
+					},
+					options: {
+						plugins: {
+							legend: {
+								position: 'bottom',
+							},
+						},
+						scales: {
+							x: {
+								stacked: true,
+							},
+							y: {
+								stacked: true,
+								beginAtZero: true,
+								ticks: {
+									stepSize: 1,
+								},
+							},
+						},
+					},
+				});
+			})
+			.catch((error) => {
+				console.error('Error while fetching event distribution data:', error);
+			});
+		}
+
+		function getRandomColor() {
+			// Function to generate random colors
+			return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
+				Math.random() * 256
+			)}, 0.8)`;
+		}
+
+		fetchUrgencyDistribution();
+	</script> -->
+
+	<script>
+		// Get the canvas element
+		var canvas = document.getElementById('chart-stacked-urgency');
 	
 		// Create stacked-bar chart using Chart.js
 		var chart = new Chart(canvas, {
