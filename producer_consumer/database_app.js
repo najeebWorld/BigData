@@ -129,11 +129,27 @@ app.get('/geteventdistribution', async (req, res) => {
         }
     };
     messages.forEach((message) => {
-        eventDistribution[message.event][message.source] += 1;
+        eventDistribution[message.event][message.urgency] += 1;
     });
     res.json(eventDistribution);
 });
 
+// app.get('/getneodistribution', async (req, res) => {
+//     // Get the current date and time
+//     const currentDate = new Date();
+//     // Get the date and time for exactly 1 month ago, split in to 4 weeks
+//     const oneWeekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000)
+//     const twoWeeksAgo = new Date(currentDate.getTime() - 14 * 24 * 60 * 60 * 1000)
+//     const threeWeeksAgo = new Date(currentDate.getTime() - 21 * 24 * 60 * 60 * 1000)
+//     const oneMonthAgo = new Date(currentDate.getTime() - 30 * 24 * 60 * 60 * 1000)
+//     // Get all the messages from the last month
+//     const neos_one_week_ago = await getNEOs(oneWeekAgo.toISOString().split('T')[0], currentDate.toISOString().split('T')[0]);
+//     const neos_two_weeks_ago = await getNEOs(twoWeeksAgo.toISOString().split('T')[0], oneWeekAgo.toISOString().split('T')[0]);
+//     const neos_three_weeks_ago = await getNEOs(threeWeeksAgo.toISOString().split('T')[0], twoWeeksAgo.toISOString().split('T')[0]);
+//     const neos_one_month_ago = await getNEOs(oneMonthAgo.toISOString().split('T')[0], threeWeeksAgo.toISOString().split('T')[0]);
+
+
+// });
 
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
@@ -282,6 +298,7 @@ async function getEventCounts() {
 
 async function getNEOs(start_date, end_date) {
     const url = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${start_date}&end_date=${end_date}&api_key=${api_key}`;
+    console.log(`Getting NEOs from ${start_date} to ${end_date} from NASA API at ${url}`);
     try {
         const response = await axios.get(url);
         return response.data.near_earth_objects;
