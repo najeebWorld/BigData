@@ -139,7 +139,7 @@ app.get('/getneodistribution', async (req, res) => {
     // Get the current date and time and the date and time for exactly 1 week ago
     const week_one_1 = new Date();
     const week_one_2 = new Date(week_one_1.getTime() - 7 * 24 * 60 * 60 * 1000)
-    // Get next window by week 
+    // Get next window by week
     const week_two_1 = new Date(week_one_2.getTime() - 1 * 24 * 60 * 60 * 1000)
     const week_two_2 = new Date(week_two_1.getTime() - 7 * 24 * 60 * 60 * 1000)
     // Get next window by week
@@ -149,16 +149,13 @@ app.get('/getneodistribution', async (req, res) => {
     const week_four_1 = new Date(week_three_2.getTime() - 1 * 24 * 60 * 60 * 1000)
     const week_four_2 = new Date(week_four_1.getTime() - 7 * 24 * 60 * 60 * 1000)
     
-    // print all dates
-    // console.log(`Getting NEOs between ${week_one_2.toISOString().split('T')[0]} and ${week_one_1.toISOString().split('T')[0]}`);
-    // console.log(`Getting NEOs between ${week_two_2.toISOString().split('T')[0]} and ${week_two_1.toISOString().split('T')[0]}`);
-    // console.log(`Getting NEOs between ${week_three_2.toISOString().split('T')[0]} and ${week_three_1.toISOString().split('T')[0]}`);
-    // console.log(`Getting NEOs between ${week_four_2.toISOString().split('T')[0]} and ${week_four_1.toISOString().split('T')[0]}`);    
-
-    const neoList1 = await getNEOs(week_one_2.toISOString().split('T')[0], week_one_1.toISOString().split('T')[0]);
-    const neoList2 = await getNEOs(week_two_2.toISOString().split('T')[0], week_two_1.toISOString().split('T')[0]);
-    const neoList3 = await getNEOs(week_three_2.toISOString().split('T')[0], week_three_1.toISOString().split('T')[0]);
-    const neoList4 = await getNEOs(week_four_2.toISOString().split('T')[0], week_four_1.toISOString().split('T')[0]);
+    // get all NEOs from the last 4 weeks in parallel
+    const [neoList1, neoList2, neoList3, neoList4] = await Promise.all([
+        getNEOs(week_one_2.toISOString().split('T')[0], week_one_1.toISOString().split('T')[0]),
+        getNEOs(week_two_2.toISOString().split('T')[0], week_two_1.toISOString().split('T')[0]),
+        getNEOs(week_three_2.toISOString().split('T')[0], week_three_1.toISOString().split('T')[0]),
+        getNEOs(week_four_2.toISOString().split('T')[0], week_four_1.toISOString().split('T')[0])
+    ]);
 
     // make distribution by size of neo
     const neoSizes = []
@@ -196,29 +193,30 @@ app.get('/getneodistribution', async (req, res) => {
 
 app.get('/sunspots', async (req, res) => {
     try {
-      const websiteURL = 'https://theskylive.com/sun-info';
-      const page = await axios.get(websiteURL);
-      const $ = cheerio.load(page.data);
-  
-      const table = $('div.sun_container');
-      const image_url = table.find('img').attr('src');
-  
-      const absolute_image_url = new URL(image_url, websiteURL).toString();
-  
-      // Fetch the image from the absolute URL
-      const imageResponse = await axios.get(absolute_image_url, { responseType: 'arraybuffer' });
-  
-      // Set the appropriate headers for the image response
-      res.set('Content-Type', 'image/jpeg');
-      res.set('Content-Disposition', 'inline');
-  
-      // Send the image data in the response
-      res.send(Buffer.from(imageResponse.data));
+        const websiteURL = 'https://theskylive.com/sun-info';
+        const page = await axios.get(websiteURL);
+        const $ = cheerio.load(page.data);
+    
+        const table = $('div.sun_container');
+        const image_url = table.find('img').attr('src');
+    
+        const absolute_image_url = new URL(image_url, websiteURL).toString();
+    
+        // Fetch the image from the absolute URL
+        const imageResponse = await axios.get(absolute_image_url, { responseType: 'arraybuffer' });
+    
+        // Set the appropriate headers for the image response
+        res.set('Content-Type', 'image/jpeg');
+        res.set('Content-Disposition', 'inline');
+    
+        // Send the image data in the response
+        res.send(Buffer.from(imageResponse.data));
     } catch (error) {
-      console.error('Error:', error.message);
-      res.status(500).send('Failed to fetch the image.');
+        console.error('Error:', error.message);
+        res.status(500).send('Failed to fetch the image.');
     }
-  });
+});
+
 
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
