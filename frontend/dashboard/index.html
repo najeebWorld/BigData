@@ -427,11 +427,11 @@
 					<div class="col-12 col-lg-6">
 						<div class="app-card app-card-chart h-100 shadow-sm">
 					        <div class="app-card-header p-3 border-0">
-						        <h4 class="app-card-title">Astroids By Size in Last Month</h4>
+						        <h4 class="app-card-title">Astroids By Size (Meters) in Last Month</h4>
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-4">					   
 						        <div class="chart-container">
-				                    <canvas id="chart-pie-size" ></canvas>
+				                    <canvas id="chart-histogram-size" ></canvas>
 						        </div>
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
@@ -653,95 +653,6 @@
 		fetchUrgencyDist();
 		console.log("worked");
 	</script>
-	<!-- <script>
-		function fetchUrgencyDistribution(){
-			const url = 'http://localhost:3001/geteventdistribution';
-			fetch(url)
-			.then(response => response.json())
-			.then((result) => {
-				console.log("urgency distribution:" + result);
-				const eventData = result; // Assuming the response is an array of objects with event data
-				const eventTypes = result.map((event) => event.eventType);
-				const urgencies = [1, 2, 3, 4, 5]; // Assuming urgency levels 1 to 5
-
-				const chartCanvas = document.getElementById('chart-stacked-urgency');
-				const ctx = chartCanvas.getContext('2d');
-
-				// Prepare the datasets for the chart
-				const datasets = urgencies.map((urgency, index) => {
-					const dataValues = eventData.map((event) => event.urgencies[index]);
-					const backgroundColor = getRandomColor(); // Helper function to generate random colors
-					return {
-						label: urgency.toString(),
-						data: dataValues,
-						backgroundColor: backgroundColor,
-					};
-				});
-
-				// Create the Stacked Bar Chart
-				new Chart(ctx, {
-					type: 'bar',
-					data: {
-						labels: eventTypes,
-						datasets: datasets,
-					},
-					options: {
-						plugins: {
-							legend: {
-								position: 'bottom',
-							},
-						},
-						scales: {
-							x: {
-								stacked: true,
-							},
-							y: {
-								stacked: true,
-								beginAtZero: true,
-								ticks: {
-									stepSize: 1,
-								},
-							},
-						},
-					},
-				});
-			})
-			.catch((error) => {
-				console.error('Error while fetching event distribution data:', error);
-			});
-		}
-
-		function getRandomColor() {
-			// Function to generate random colors
-			return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(
-				Math.random() * 256
-			)}, 0.8)`;
-		}
-
-		fetchUrgencyDistribution();
-	</script> -->
-
-
-	<script>
-		// Get the canvas element
-		var canvas = document.getElementById('chart-pie-size');
-	
-		// Create the chart using Chart.js
-		var chart = new Chart(canvas, {
-			type: 'pie',
-			data: {
-				labels: ['Astroid 1', 'Astroid 2', 'Astroid 3', 'Astroid 4', 'Astroid 5'], // Array of labels for each data point
-				datasets: [{
-					label: 'Dataset',
-					data: [10, 42, 28, 5, 15], // Array of data values for each data point
-					backgroundColor: ['red', 'blue', 'green', 'yellow', 'purple'], // Array of colors for each data point
-				}]
-			},
-			options: {
-				// Chart options here (e.g., title, legend, etc.)
-			}
-		});
-	</script>
 
 	<script>
 		// Function to fetch neo in last and next 24 hours
@@ -824,6 +735,84 @@
 		// Call the function to fetch and display the near earth objects data
 		fetchNEOS();
 	</script>
+
+<script>
+    // Function to fetch data from the server
+    function fetchNeoDist() {
+		const url = 'http://localhost:3001/getneodistribution';
+		fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                // Call the function to create the histogram
+                createHistogram(data);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+    // Function to create the histogram
+    function createHistogram(data) {
+        var binCount = 10; // Number of bins for the histogram
+
+        // Create an array of bin edges for the histogram
+        var binEdges = [];
+        var maxVal = Math.max(...data);
+        var minVal = Math.min(...data);
+        var binWidth = (maxVal - minVal) / binCount;
+
+        for (let i = 0; i <= binCount; i++) {
+            binEdges.push(minVal + i * binWidth);
+        }
+
+        // Create an array to store the frequency count in each bin
+        var binCounts = Array(binCount).fill(0);
+
+        // Calculate the frequency count for each bin
+        data.forEach((value) => {
+            var binIndex = Math.floor((value - minVal) / binWidth);
+            binCounts[binIndex]++;
+        });
+
+        var ctx = document.getElementById('chart-histogram-size').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: binEdges.map((edge, index) => {
+                    if (index === binEdges.length - 1) {
+                        return edge.toFixed(2) + '+';
+                    } else {
+                        return edge.toFixed(2) + '-' + binEdges[index + 1].toFixed(2);
+                    }
+                }),
+                datasets: [{
+                    label: 'Frequency',
+                    data: binCounts,
+                    backgroundColor: 'blue',
+                }],
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Asteroid Sizes',
+                        },
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Frequency',
+                        },
+                    },
+                },
+            },
+        });
+    }
+
+    // Call the fetchData function to fetch data and create the histogram
+    fetchNeoDist();
+</script>
 
 	<script>
 		// Get the canvas element
