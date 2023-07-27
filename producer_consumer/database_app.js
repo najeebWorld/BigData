@@ -217,6 +217,44 @@ app.get('/sunspots', async (req, res) => {
     }
 });
 
+app.get('/sundata', async (req, res) => {
+    try {
+        const url = 'https://theskylive.com/sun-info';
+        const response = await axios.get(url);
+        const html = response.data;
+        const $ = cheerio.load(html);
+    
+        // Find the relevant div elements
+        const rise_div = $('div.rise');
+        const transit_div = $('div.transit');
+        const set_div = $('div.set');
+        
+        const rise_time = rise_div.find('time').text().trim();
+        const transit_time = transit_div.find('time').text().trim();    
+        const set_time = set_div.find('time').text().trim();
+
+        const ra = $('div.keyinfobox:contains("Right Ascension") ar').text().trim();
+        const dec = $('div.keyinfobox:contains("Declination") ar').text().trim();
+        const constellation = $('div.keyinfobox:contains("Constellation") ar a').text().trim();
+        const magnitude = $('div.keyinfobox:contains("Magnitude") ar').text().trim();
+    
+        // Prepare the response object
+        const responseData = {
+            rise_time,
+            transit_time,
+            set_time,
+            ra,
+            dec,
+            constellation,
+            magnitude,
+        };
+    
+        res.json(responseData);
+    } catch (error) {
+        res.status(500).json({ error: 'Something went wrong.' });
+    }
+});
+
 
 async function getMessages(options) {
     const { startDate, endDate, eventType, sourceType } = options;
