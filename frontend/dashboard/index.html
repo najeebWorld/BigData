@@ -144,7 +144,7 @@
 			    
 			    <h1 class="app-page-title">Overview</h1>
 				    
-			    <div class="row g-4 mb-4">
+			    <div class="row g-4 mb-4 justify-content-center align-items-center">
 				    <div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
@@ -157,7 +157,7 @@
 				    
 				    <div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
-						    <div class="app-card-body p-3 p-lg-4">
+						    <div class="app-card-body p-3 p-lg-6">
 							    <h4 class="stats-type mb-1">Apparent Brightness Rise</h4>
 							    <div class="stats-figure" id="abr"></div>
 						    </div><!--//app-card-body-->
@@ -272,7 +272,7 @@
 										<div class="row g-4 mb-4 justify-content-around">
 											<div class="col-6 col-lg-4">
 												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
+													<div class="app-card-body p-3 p-lg-6">
 														<h4 class="stats-type mb-1">Urgency</h4>
 														<div id="urgency-latest"></div>
 													</div><!--//app-card-body-->
@@ -282,7 +282,7 @@
 
 											<div class="col-6 col-lg-4">
 												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
+													<div class="app-card-body p-3 p-lg-6">
 														<h4 class="stats-type mb-1">Date and Time</h4>
 														<div id="date-latest"></div>
 													</div><!--//app-card-body-->
@@ -294,7 +294,7 @@
 										<div class="row g-4 mb-4 justify-content-around">
 											<div class="col-6 col-lg-4">
 												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
+													<div class="app-card-body p-3 p-lg-6">
 														<h4 class="stats-type mb-1">RA</h4>
 														<div id="ra-latest"></div>
 													</div><!--//app-card-body-->
@@ -304,7 +304,7 @@
 								
 											<div class="col-6 col-lg-4">
 												<div class="app-card app-card-stat shadow-sm h-100">
-													<div class="app-card-body p-3 p-lg-4">
+													<div class="app-card-body p-3 p-lg-6">
 														<h4 class="stats-type mb-1">DEC</h4>
 														<div id="dec-latest"></div>
 													</div><!--//app-card-body-->
@@ -380,36 +380,6 @@
 			        </div><!--//col-->
 			    </div><!--//row-->
 
-			    <div class="row g-4 mb-4">
-				    <div class="col-12 col-lg-6">
-					    <div class="app-card app-card-chart h-100 shadow-sm">
-					        <div class="app-card-header p-3 border-0">
-						        <h4 class="app-card-title">Sun Radiation Levels Over Past 2H</h4>
-					        </div><!--//app-card-header-->
-					        <div class="app-card-body p-4">					   
-						        <div class="chart-container">
-				                    <canvas id="chart-line-radiation" ></canvas>
-						        </div>
-					        </div><!--//app-card-body-->
-				        </div><!--//app-card-->
-			        </div><!--//col-->
-			        <div class="col-12 col-lg-6">
-				    	<div class="app-card app-card-chart h-100 shadow-sm">
-					        <div class="app-card-header p-3">
-						        <div class="row justify-content-between align-items-center">
-							        <div class="col-auto">
-						                <h4 class="app-card-title">Sun Data Over Past 2H</h4>
-							        </div><!--//col-->
-						        </div><!--//row-->
-					        </div><!--//app-card-header-->
-						        <div class="chart-container">
-				                    <canvas id="canvas-linechart-sunData" ></canvas>
-						        </div>
-					        </div><!--//app-card-body-->
-				        </div><!--//app-card-->
-			        </div><!--//col-->
-			    </div><!--//row-->
-
 				<div class="row g-4 mb-4">
 				    <div class="col-12 col-lg-6">
 						<div class="app-card app-card-chart h-100 shadow-sm">
@@ -431,12 +401,120 @@
 					        </div><!--//app-card-header-->
 					        <div class="app-card-body p-4">					   
 						        <div class="chart-container">
-				                    <canvas id="chart-histogram-size" ></canvas>
+				                    <canvas id="astroid-chart" width="800" height="400" ></canvas>
 						        </div>
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
 					</div><!--//col-->
 				</div><!--//row-->
+
+
+			    <div class="row g-4 mb-4">
+					<div class="col-12 col-lg-6"> 
+						<div class="app-card app-card-stats-table h-100 shadow-sm">
+							<div class="app-card-header p-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<h4 class="app-card-title">Current Sun Info</h4>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//app-card-header-->
+							<div class="app-card-body p-3 p-lg-4">
+								<div class="table-responsive">
+									<table class="table table-borderless mb-0">
+										<div class="row g-4 mb-4 justify-content-around">
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-4">
+														<h4 class="stats-type mb-1">Rise Time</h4>
+														<div id= "rise-time"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+		
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-4">
+														<h4 class="stats-type mb-1">Set Time</h4>
+														<div id="set-time"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+		
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-4">
+														<h4 class="stats-type mb-1">Transit Time</h4>
+														<div id ="transit-time"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+										</div><!--//row-->
+		
+										<div class="row g-4 mb-4 justify-content-around">
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-6">
+														<h4 class="stats-type mb-1">Constellation</h4>
+														<div id="constellation"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+		
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-6">
+														<h4 class="stats-type mb-1">Right Ascension (RA)</h4>
+														<div id="ra"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+								
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-6">
+														<h4 class="stats-type mb-1">Declination (DEC)</h4>
+														<div id="dec"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+										</div><!--//row-->
+		
+										<div class="row g-4 mb-4 justify-content-around">
+											<div class="col-6 col-lg-4">
+												<div class="app-card app-card-stat shadow-sm h-100">
+													<div class="app-card-body p-3 p-lg-6">
+														<h4 class="stats-type mb-1">Magnitude</h4>
+														<div id="magnitude"></div>
+													</div><!--//app-card-body-->
+													<a class="app-card-link-mask" href="#"></a>
+												</div><!--//app-card-->
+											</div><!--//col-->
+										</div><!--//row-->
+									</table>
+								</div><!--//table-responsive-->
+							</div><!--//app-card-body-->
+						</div><!--//app-card-->
+					</div> <!--//col-->
+				    
+			        <div class="col-12 col-lg-6">
+						<div class="app-card app-card-photo h-100 shadow-sm">
+					        <div class="app-card-header p-3 border-0">
+						        <h4 class="app-card-title">Current Sun Visual</h4>
+					        </div><!--//app-card-header-->
+					        <div class="app-card-body p-4">					   
+						       <!-- Add an img element with a placeholder source -->
+							   <img id="sun-photo" src="placeholder.jpg" alt="Sun Photo" style="max-width: 100%; height: auto;">
+					        </div><!--//app-card-body-->
+				        </div><!--//app-card-->
+					</div><!--//col-->	
+			    </div><!--//row-->
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 	    
@@ -736,174 +814,147 @@
 		fetchNEOS();
 	</script>
 
-<script>
-    // Function to fetch data from the server
-    function fetchNeoDist() {
-		const url = 'http://localhost:3001/getneodistribution';
-		fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                // Call the function to create the histogram
-                createHistogram(data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }
-
-    // Function to create the histogram
-    function createHistogram(data) {
-        var binCount = 10; // Number of bins for the histogram
-
-        // Create an array of bin edges for the histogram
-        var binEdges = [];
-        var maxVal = Math.max(...data);
-        var minVal = Math.min(...data);
-        var binWidth = (maxVal - minVal) / binCount;
-
-        for (let i = 0; i <= binCount; i++) {
-            binEdges.push(minVal + i * binWidth);
-        }
-
-        // Create an array to store the frequency count in each bin
-        var binCounts = Array(binCount).fill(0);
-
-        // Calculate the frequency count for each bin
-        data.forEach((value) => {
-            var binIndex = Math.floor((value - minVal) / binWidth);
-            binCounts[binIndex]++;
-        });
-
-        var ctx = document.getElementById('chart-histogram-size').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: binEdges.map((edge, index) => {
-                    if (index === binEdges.length - 1) {
-                        return edge.toFixed(2) + '+';
-                    } else {
-                        return edge.toFixed(2) + '-' + binEdges[index + 1].toFixed(2);
-                    }
-                }),
-                datasets: [{
-                    label: 'Frequency',
-                    data: binCounts,
-                    backgroundColor: 'blue',
-                }],
-            },
-            options: {
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Asteroid Sizes',
-                        },
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Frequency',
-                        },
-                    },
-                },
-            },
-        });
-    }
-
-    // Call the fetchData function to fetch data and create the histogram
-    fetchNeoDist();
-</script>
-
 	<script>
-		// Get the canvas element
-		var canvas = document.getElementById('chart-line-radiation');
-	
-		// Generate random data for the chart (replace with your actual data)
-		var radiationLevels = [10, 20, 30, 40, 35, 25, 15, 30]; // Example data for radiation levels
-		var timeLabels = ['12:00', '12:15', '12:30', '12:45', '13:00', '13:15', '13:30', '13:45']; // Example time labels
-	
-		// Create the chart using Chart.js
-		var chart = new Chart(canvas, {
-			type: 'line',
-			data: {
-				labels: timeLabels, // Array of time labels
-				datasets: [{
-					label: 'Radiation Levels',
-					data: radiationLevels, // Array of radiation levels data
-					fill: 'origin', // Fill the area under the line
-					backgroundColor: 'rgba(75, 192, 192, 0.3)', // Background color of the area
-					borderColor: 'rgba(75, 192, 192, 1)', // Color of the line
-					borderWidth: 2 // Width of the line
-				}]
-			},
-			options: {
-				scales: {
+		// Function to fetch data from the server
+		function fetchNeoDist() {
+			const url = 'http://localhost:3001/getneodistribution';
+			fetch(url)
+				.then((response) => response.json())
+				.then((asteroidSizes) => {
+					// Assume 'asteroidSizes' is the array of asteroid sizes received from the server
+
+				// Calculate the number of bins for the histogram
+				const numBins = 50;
+
+				// Calculate the minimum and maximum size of asteroids
+				const minSize = Math.min(...asteroidSizes);
+				const maxSize = Math.max(...asteroidSizes);
+
+				// Calculate the width of each bin
+				const binWidth = (maxSize - minSize) / numBins;
+
+				// Initialize the histogram data
+				const histogramData = Array(numBins).fill(0);
+
+				// Calculate the frequency of sizes in each bin
+				for (const size of asteroidSizes) {
+				const binIndex = Math.floor((size - minSize) / binWidth);
+				if (binIndex >= 0 && binIndex < numBins) {
+					histogramData[binIndex]++;
+				}
+				}
+
+				// Generate labels for the histogram (e.g., bin ranges)
+				const binLabels = Array(numBins).fill().map((_, i) => {
+				const start = minSize + i * binWidth;
+				const end = start + binWidth;
+				return `${start.toFixed(2)} - ${end.toFixed(2)}`;
+				});
+
+				// Create the chart using Chart.js
+				var ctx = document.getElementById('astroid-chart').getContext('2d');
+				var chart = new Chart(ctx, {
+				type: 'bar', // Set the chart type to 'bar'
+				data: {
+					labels: binLabels,
+					datasets: [{
+					label: 'Frequency',
+					data: histogramData,
+					backgroundColor: 'rgba(54, 162, 235, 0.6)',
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
 					x: {
-						display: true,
 						title: {
-							display: true,
-							text: 'Radiation Levels'
-						}
+						display: true,
+						text: 'Asteroid Size',
+						},
 					},
 					y: {
-						display: true,
+						beginAtZero: true,
 						title: {
-							display: true,
-							text: 'Time Frame (2 hours)'
-						}
+						display: true,
+						text: 'Frequency',
+						},
 					}
-				}
-			}
-		});
+					}
+				},
+				});
+				})
+				.catch((error) => {
+					console.error('Error fetching data:', error);
+				});
+		}
+
+		// Call the fetchData function to fetch data and create the histogram
+		fetchNeoDist();
 	</script>
+
 	<script>
-		// Get the canvas element
-		var canvas = document.getElementById('canvas-linechart-sunData');
-	
-		// Generate random data for the chart (replace with your actual data)
-		var riseAzimuthData = [45, 50, 55, 60, 65, 70, 75, 80]; // Example data for Rise Azimuth
-		var setAzimuthData = [80, 75, 70, 65, 60, 55, 50, 45]; // Example data for Set Azimuth
-		var timeLabels = ['12:00', '12:15', '12:30', '12:45', '13:00', '13:15', '13:30', '13:45']; // Example time labels
-	
-		// Create the chart using Chart.js
-		var chart = new Chart(canvas, {
-			type: 'line',
-			data: {
-				labels: timeLabels, // Array of time labels
-				datasets: [{
-					label: 'Rise Azimuth',
-					data: riseAzimuthData, // Array of Rise Azimuth data
-					fill: false, // Do not fill the area under the line
-					borderColor: 'rgba(75, 192, 192, 1)', // Color of the line
-					borderWidth: 2 // Width of the line
-				}, {
-					label: 'Set Azimuth',
-					data: setAzimuthData, // Array of Set Azimuth data
-					fill: false, // Do not fill the area under the line
-					borderColor: 'rgba(192, 75, 192, 1)', // Color of the line
-					borderWidth: 2 // Width of the line
-				}]
-			},
-			options: {
-				scales: {
-					x: {
-						display: true,
-						title: {
-							display: true,
-							text: 'Time Frame (2 hours)'
-						}
-					},
-					y: {
-						display: true,
-						title: {
-							display: true,
-							text: 'Azimuth'
-						}
-					}
-				}
-			}
-		});
+		// Function to fetch sun info from server
+		function fetchSunInfo(){
+			const url = 'http://localhost:3001/sundata';
+			fetch(url)
+				.then(response => response.json())
+				.then((result) => {
+					console.log(result.length);
+
+					const riseTime = document.getElementById('rise-time');
+					riseTime.textContent = result["rise_time"];
+					
+					const transitTime = document.getElementById('transit-time');
+					transitTime.textContent = result["transit_time"];
+
+					const setTime = document.getElementById('set-time');
+					setTime.textContent = result["set_time"];
+
+					const ra = document.getElementById('ra');
+					ra.textContent = result["ra"];
+
+					const dec = document.getElementById('dec');
+					dec.textContent = result["dec"];
+
+					const constellation = document.getElementById('constellation');
+					constellation.textContent = result["constellation"];
+
+					const magnitude = document.getElementById('magnitude');
+					magnitude.textContent = result["magnitude"];
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+
+		// Call the function to fetch and display the sun info data
+		fetchSunInfo();
 	</script>
+
+	<script>
+		// Function to fetch sun photo from the server
+		function fetchSunPhoto() {
+			const url = "http://localhost:3001/sunspots"
+			fetch(url)
+				.then((response) => response.blob())
+				.then((blob) => {
+					// Convert the Blob data to an object URL
+					var objectURL = URL.createObjectURL(blob);
+
+					// Set the src attribute of the img element to the object URL
+					document.getElementById('sun-photo').src = objectURL;
+				})
+				.catch((error) => {
+					console.error('Error fetching sun photo:', error);
+				});
+		}
+
+		// Call the fetchSunPhoto function to fetch the sun photo from the server
+		fetchSunPhoto();
+	</script>
+
+	
 	
 
 </body>
