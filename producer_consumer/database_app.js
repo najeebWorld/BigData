@@ -396,7 +396,7 @@ async function getEventCounts() {
             result[eventType] = eventCounts[eventType] || 0;
         });
   
-        return eventCounts;
+        return result;
     } catch (error) {
         console.error('Error getting event counts:', error.message);
         return {};

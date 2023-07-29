@@ -48,10 +48,12 @@ setInterval(() => {
                     }
                 });
             }
-            console.log('Response from the server:', response.data);
+            if(response.data.urgency >= 4) {
+                console.log('Recent message has high urgency:', response.data.urgency);
+            }
         })
         .catch((error) => {
-            console.error('Error making the request NOAH:', error.message);
+            console.error('Error making the request:', error.message);
         });
 }, 12000);
 
