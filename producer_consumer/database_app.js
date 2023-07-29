@@ -77,9 +77,11 @@ app.get('/getneos', async (req, res) => {
     console.log(`Getting NEOs between ${yesterday} and ${tomorrow}`);
 
     const neoList = await getNEOs(yesterday, tomorrow);
+    const yesterday_today = [...neoList[yesterday], ...neoList[today]];
+    const today_tomorrow = [...neoList[today], ...neoList[tomorrow]];
     const neos = {
-        'last': findNEOsInTimeFrame([...neoList[yesterday], ...neoList[today]], twentyFourHoursAgo, currentDate),
-        'next': findNEOsInTimeFrame([...neoList[today], ...neoList[tomorrow]], currentDate, twentyFourHoursLater),
+        'last': findNEOsInTimeFrame(yesterday_today, twentyFourHoursAgo, currentDate),
+        'next': findNEOsInTimeFrame(today_tomorrow, currentDate, twentyFourHoursLater),
     }
     res.json(neos);
 });
