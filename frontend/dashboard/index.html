@@ -104,19 +104,6 @@
 		                         <span class="nav-link-text">Overview</span>
 					        </a><!--//nav-link-->
 					    </li><!--//nav-item-->
-					   
-						<li class="nav-item">
-					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					        <a class="nav-link" href="charts.html">
-						        <span class="nav-icon">
-						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-	  <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
-	</svg>
-						         </span>
-		                         <span class="nav-link-text">Analytics</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-
 					    <li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					        <a class="nav-link" href="search.html">
@@ -138,12 +125,9 @@
     </header><!--//app-header-->
     
     <div class="app-wrapper">
-	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
-			    
 			    <h1 class="app-page-title">Overview</h1>
-				    
 			    <div class="row g-4 mb-4 justify-content-center align-items-center">
 				    <div class="col-6 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
@@ -954,9 +938,71 @@
 		fetchSunPhoto();
 	</script>
 
-	
-	
+	<script>
+		// // Add this JavaScript code to show and hide the popup
+		// const popup = document.getElementById('popup');
+		// const eventType = document.getElementById('eventType');
+		// const eventName = document.getElementById('eventName');
+		// const eventSource = document.getElementById('eventSource');
+		// const eventUrgency = document.getElementById('eventUrgency');
+		// const eventDate = document.getElementById('eventDate');
+		// const eventRA = document.getElementById('eventRA');
+		// const eventDEC = document.getElementById('eventDEC');
+		// const eventTimeStamp = document.getElementById('eventTimeStamp');
 
+
+		// // Show the popup with custom message and event data
+		// function showPopup(eventType, eventName, eventSource, eventUrgency, eventDate, eventRA, eventDEC, eventTimeStamp) {
+		// eventType.textContent = `Event Type: ${eventType}`;
+		// eventName.textContent = `Event Name: ${eventName}`;
+		// eventSource.textContent = `Event Source: ${eventSource}`;
+		// eventUrgency.textContent = `Event Urgency: ${eventUrgency}`;
+		// eventDate.textContent = `Event Date: ${eventDate}`;
+		// eventRA.textContent = `Event RA: ${eventRA}`;
+		// eventDEC.textContent = `Event DEC: ${eventDEC}`;
+		// eventTimeStamp.textContent = `Event Time Stamp: ${eventTimeStamp}`;
+		// // eventSource.textContent = eventSource;
+		// // eventUrgency.textContent = eventUrgency;
+		// // eventDate.textContent = eventDate;
+		// // eventRA.textContent = eventRA;
+		// // eventDEC.textContent = eventDEC;
+		// // eventTimeStamp.textContent = eventTimeStamp;
+
+		// popup.style.display = 'block';
+		// }
+
+		// // Hide the popup
+		// function hidePopup() {
+		// popup.style.display = 'none';
+		// }
+
+		// const ws = new WebSocket('ws://localhost:8080');
+		// // Call the showPopup() function when you receive a message from the WebSocket server
+		// ws.onmessage = (event) => {
+		// const eventData = event.data; // The event data received from the server
+
+		// showPopup(
+		// 	eventType, 
+		// 	eventName,
+		// 	eventSource,
+		// 	eventUrgency,
+		// 	eventDate,
+		// 	eventRA,
+		// 	eventDEC,
+		// 	eventTimeStamp
+		// );
+		// };
+
+		const ws = new WebSocket('ws://localhost:8080');
+		// Handle messages received from the WebSocket server
+		ws.onmessage = (event) => {
+			console.log("received message from websocket: " + event.data)
+			const data = JSON.parse(event.data);
+			const displayString = `URGENT MESSAGE RECEIVED: \n Event Type: ${data.event} \n Event Name: ${data.name} \n Source: ${data.source} \n Urgency:${data.urgency} \n Date: ${data.date} \n RA: ${data.ra} \n DEC: ${data.dec}`;
+		 	alert(displayString); // Display the pop-up message
+		};
+
+	  </script>
 </body>
 </html> 
 
