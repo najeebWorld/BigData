@@ -309,7 +309,7 @@ async function getMessages(options) {
         });
 
         console.log(`Retrieved ${response.hits.total.value} messages`);
-        return response.hits.hits.map((hit) => hit._source);;
+        return response.hits.hits.map((hit) => hit._source);
     } catch (error) {
         console.error('Error retrieving messages:', error);
         return [];
