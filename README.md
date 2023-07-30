@@ -27,24 +27,21 @@ python3 load_BSC_to_redis.py
 
 ## To Start The Kafka Consumer:
 ```bash
-cd producer_consumer
 node kafka_consumer.js
 ```
 
 ## To Start The Generator and Kafka Producer:
 ```bash
-cd producer_consumer
 python3 generate_messages.py
 ```
 
 ## To Start The ElasticSearch and Redis Database API:
 ```bash
-cd producer_consumer
 node database_app.js
 ```
 
 ## To Start The Dashboard Web Server:
 ```bash
 cd frontend
-node frontend/app.js
+node app.js
 ```
