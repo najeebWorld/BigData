@@ -117,9 +117,7 @@
 					    </li><!--//nav-item-->
 					    			    
 				    </ul><!--//app-menu-->
-			    </nav><!--//app-nav-->
-
-		       
+			    </nav><!--//app-nav-->  
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
     </header><!--//app-header-->
@@ -300,8 +298,7 @@
 						        </div><!--//table-responsive-->
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
-			        </div><!--//col-->
-			        
+			        </div><!--//col-->    
 			    </div><!--//row-->
 
 				<div class="row g-4 mb-4">
@@ -763,7 +760,7 @@
 					});
 
 					// next 24 hours
-					results["last"].forEach((result) => {
+					results["next"].forEach((result) => {
 						console.log(result);
 						const rowNext = document.createElement('tr');
 
@@ -939,60 +936,8 @@
 	</script>
 
 	<script>
-		// // Add this JavaScript code to show and hide the popup
-		// const popup = document.getElementById('popup');
-		// const eventType = document.getElementById('eventType');
-		// const eventName = document.getElementById('eventName');
-		// const eventSource = document.getElementById('eventSource');
-		// const eventUrgency = document.getElementById('eventUrgency');
-		// const eventDate = document.getElementById('eventDate');
-		// const eventRA = document.getElementById('eventRA');
-		// const eventDEC = document.getElementById('eventDEC');
-		// const eventTimeStamp = document.getElementById('eventTimeStamp');
 
-
-		// // Show the popup with custom message and event data
-		// function showPopup(eventType, eventName, eventSource, eventUrgency, eventDate, eventRA, eventDEC, eventTimeStamp) {
-		// eventType.textContent = `Event Type: ${eventType}`;
-		// eventName.textContent = `Event Name: ${eventName}`;
-		// eventSource.textContent = `Event Source: ${eventSource}`;
-		// eventUrgency.textContent = `Event Urgency: ${eventUrgency}`;
-		// eventDate.textContent = `Event Date: ${eventDate}`;
-		// eventRA.textContent = `Event RA: ${eventRA}`;
-		// eventDEC.textContent = `Event DEC: ${eventDEC}`;
-		// eventTimeStamp.textContent = `Event Time Stamp: ${eventTimeStamp}`;
-		// // eventSource.textContent = eventSource;
-		// // eventUrgency.textContent = eventUrgency;
-		// // eventDate.textContent = eventDate;
-		// // eventRA.textContent = eventRA;
-		// // eventDEC.textContent = eventDEC;
-		// // eventTimeStamp.textContent = eventTimeStamp;
-
-		// popup.style.display = 'block';
-		// }
-
-		// // Hide the popup
-		// function hidePopup() {
-		// popup.style.display = 'none';
-		// }
-
-		// const ws = new WebSocket('ws://localhost:8080');
-		// // Call the showPopup() function when you receive a message from the WebSocket server
-		// ws.onmessage = (event) => {
-		// const eventData = event.data; // The event data received from the server
-
-		// showPopup(
-		// 	eventType, 
-		// 	eventName,
-		// 	eventSource,
-		// 	eventUrgency,
-		// 	eventDate,
-		// 	eventRA,
-		// 	eventDEC,
-		// 	eventTimeStamp
-		// );
-		// };
-
+		// Create a WebSocket connection to the server
 		const ws = new WebSocket('ws://localhost:8080');
 		// Handle messages received from the WebSocket server
 		ws.onmessage = (event) => {

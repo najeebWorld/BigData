@@ -1,139 +1,186 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
+
 <head>
     <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
-    
+
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">   
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
- 
+
     <!-- Datepicker CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico"> 
-    
+    <link rel="shortcut icon" href="favicon.ico">
+
     <!-- FontAwesome JS-->
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
-    
-    <!-- App CSS -->  
+
+    <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
 
     <style>
         .dropdown-toggle {
             background-color: #ffffff;
             border-color: #808080;
-            color: #000000; /* Optional - Set the text color */
+            color: #000000;
+            /* Optional - Set the text color */
         }
+
         #result-card-container {
-        max-height: 90vh; /* Set the maximum height as per your requirement */
-        overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+            max-height: 90vh;
+            /* Set the maximum height as per your requirement */
+            overflow-y: auto;
+            /* Enable vertical scrollbar when content overflows */
         }
     </style>
-    
+</head>
 
-    
-</head> 
-
-<body class="app">   	
-    <header class="app-header fixed-top">	   	            
-        <div class="app-header-inner">  
-	        <div class="container-fluid py-2">
-		        <div class="app-header-content"> 
-		            <div class="row justify-content-between align-items-center">
-			        
-				    <div class="col-auto">
-					    <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
-						    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
-					    </a>
-				    </div><!--//col-->
-		            <div class="search-mobile-trigger d-sm-none col">
-			            <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
-			        </div><!--//col-->
+<body class="app">
+    <header class="app-header fixed-top">
+        <div class="app-header-inner">
+            <div class="container-fluid py-2">
                 <div class="app-header-content">
-                    <style>
-                        .app-header-content {
-                            display: flex;
-                            align-items: center;
-                            padding: 0 15px;
-                        }
-                    
-                        #event-type-dropdown {
-                            margin-left: 10px;
-                        }
-                    </style>
+                    <div class="row justify-content-between align-items-center">
 
-                    <div id="event-type-dropdown" class="dropdown" style="margin-left: 10px;">  <!-- Event type drown down -->
-                        <button class="btn search-btn btn-primary dropdown-toggle" type="button" id="event-type-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Event Type
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="event-type-dropdown-button">
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedEventOption('All')">All</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedEventOption('GRB')">GRB</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedEventOption('Apparent Brightness Rise')">Apparent Brightness Rise</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedEventOption('UV Rise')">UV Rise</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedEventOption('X-Ray Rise')">X-Ray Rise</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedEventOption('Comet')">Comet</a></li>
-                            <!-- Add more types as needed -->
-                        </ul>
+                        <div class="col-auto">
+                            <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                    role="img">
+                                    <title>Menu</title>
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                                        stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                                </svg>
+                            </a>
+                        </div><!--//col-->
+                        <div class="search-mobile-trigger d-sm-none col">
+                            <i class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"></i>
+                        </div><!--//col-->
+                        <div class="app-header-content">
+                            <style>
+                                .app-header-content {
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 0 15px;
+                                }
 
-                    </div> <!-- End of event type drop down -->
-                    <div id="telescope-dropdown" class="dropdown" style="margin-left: 10px;">  <!-- Telescope drown down -->
-                        <button class="btn search-btn btn-primary dropdown-toggle" type="button" id="telescope-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
-                           Telescope
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="event-type-dropdown-button">
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('All')">All</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('MMT')">MMT</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Gemini Observatory Telescopes')">Gemini Observatory Telescopes</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Very Large Telescope')">Very Large Telescope</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Subaru Telescope')">Subaru Telescope</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Large Binocular Telescope')">Large Binocular Telescope</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Southern African Large Telescope')">Southern African Large Telescope</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Keck 1 and 2')">Keck 1 and 2</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Hobby-Eberly Telescope')">Hobby-Eberly Telescope</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Gran Telescopio Canarias')">Gran Telescopio Canarias</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('The Giant Magellan Telescope')">The Giant Magellan Telescope</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('Thirty Meter Telescope')">Thirty Meter Telescope</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="updateSelectedTelescopeOption('European Extremely Large Telescope')">European Extremely Large Telescope</a></li>
-                            <!-- Add more types as needed -->
-                        </ul>
-                    </div> <!-- End of telescope drop down -->
-                    
-                    <div class="col-auto"> <!-- Start date and end date -->
-                        <div class="input-group">
-                            <input type="text" class="form-control datepicker start-date" style="margin-left: 10px;" placeholder="Start Date" aria-label="Start Date" id="start-date-input">
-                            <span class="input-group-text"><i class="far fa-calendar"></i></span>
-                        </div><!--//input-group-->
-                    </div><!--//col-auto-->
+                                #event-type-dropdown {
+                                    margin-left: 10px;
+                                }
+                            </style>
 
-                    <div class="col-auto">
-                        <div class="input-group">
-                            <input type="text" class="form-control datepicker end-date" style="margin-left: 10px;" placeholder="End Date" aria-label="End Date" id="end-date-input">
-                            <span class="input-group-text"><i class="far fa-calendar"></i></span>
-                        </div><!--//input-group-->
-                    </div><!--//col-auto-->
-                
-                    <div class="app-search-box col"> <!-- Search button -->
-                        <button type="button" class="btn search-btn" onclick="search()" style="margin-left: 10px;">
-                            <i class="fa-solid fa-magnifying-glass"></i> Search
-                        </button>
-                    </div><!--//app-search-box-->
+                            <div id="event-type-dropdown" class="dropdown" style="margin-left: 10px;">
+                                <!-- Event type drown down -->
+                                <button class="btn search-btn btn-primary dropdown-toggle" type="button"
+                                    id="event-type-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Event Type
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="event-type-dropdown-button">
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedEventOption('All')">All</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedEventOption('GRB')">GRB</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedEventOption('Apparent Brightness Rise')">Apparent
+                                            Brightness Rise</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedEventOption('UV Rise')">UV Rise</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedEventOption('X-Ray Rise')">X-Ray Rise</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedEventOption('Comet')">Comet</a></li>
+                                    <!-- Add more types as needed -->
+                                </ul>
+
+                            </div> <!-- End of event type drop down -->
+                            <div id="telescope-dropdown" class="dropdown" style="margin-left: 10px;">
+                                <!-- Telescope drown down -->
+                                <button class="btn search-btn btn-primary dropdown-toggle" type="button"
+                                    id="telescope-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Telescope
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="event-type-dropdown-button">
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('All')">All</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('MMT')">MMT</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Gemini Observatory Telescopes')">Gemini
+                                            Observatory Telescopes</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Very Large Telescope')">Very Large
+                                            Telescope</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Subaru Telescope')">Subaru
+                                            Telescope</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Large Binocular Telescope')">Large
+                                            Binocular Telescope</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Southern African Large Telescope')">Southern
+                                            African Large Telescope</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Keck 1 and 2')">Keck 1 and 2</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Hobby-Eberly Telescope')">Hobby-Eberly
+                                            Telescope</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Gran Telescopio Canarias')">Gran
+                                            Telescopio Canarias</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('The Giant Magellan Telescope')">The
+                                            Giant Magellan Telescope</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('Thirty Meter Telescope')">Thirty
+                                            Meter Telescope</a></li>
+                                    <li><a class="dropdown-item" href="#"
+                                            onclick="updateSelectedTelescopeOption('European Extremely Large Telescope')">European
+                                            Extremely Large Telescope</a></li>
+                                </ul>
+                            </div> <!-- End of telescope drop down -->
+
+                            <div class="col-auto"> <!-- Start date and end date -->
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker start-date"
+                                        style="margin-left: 10px;" placeholder="Start Date" aria-label="Start Date"
+                                        id="start-date-input">
+                                    <span class="input-group-text"><i class="far fa-calendar"></i></span>
+                                </div><!--//input-group-->
+                            </div><!--//col-auto-->
+
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker end-date"
+                                        style="margin-left: 10px;" placeholder="End Date" aria-label="End Date"
+                                        id="end-date-input">
+                                    <span class="input-group-text"><i class="far fa-calendar"></i></span>
+                                </div><!--//input-group-->
+                            </div><!--//col-auto-->
+
+                            <div class="app-search-box col"> <!-- Search button -->
+                                <button type="button" class="btn search-btn" onclick="search()"
+                                    style="margin-left: 10px;">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Search
+                                </button>
+                            </div><!--//app-search-box-->
+                        </div><!--//app-header-content-->
+                    </div><!--//row-->
                 </div><!--//app-header-content-->
-		        </div><!--//row-->
-	            </div><!--//app-header-content-->
-	        </div><!--//container-fluid-->
+            </div><!--//container-fluid-->
 
             <div id="result-card-container">
                 <table class="table table-striped" style="max-height: 300px; overflow-y: auto;">
@@ -155,245 +202,169 @@
             </div><!--//result-card-container-->
 
         </div><!--//app-header-inner-->
-        <div id="app-sidepanel" class="app-sidepanel"> 
-	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
-	        <div class="sidepanel-inner d-flex flex-column">
-		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a> 
-			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
-				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
-					    <li class="nav-item">
-					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					        <a class="nav-link" href="index.html">
-						        <span class="nav-icon">
-						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-		  <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
-		  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-		</svg>
-						         </span>
-		                         <span class="nav-link-text">Overview</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-					  
-					    <li class="nav-item">
-					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					        <a class="nav-link active" href="search.html">
-						        <span class="nav-icon">
-						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="search-mobile-trigger-icon fa-solid fa-magnifying-glass" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-	  <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
-	</svg>
-						         </span>
-		                         <span class="nav-link-text">Search</span>
-					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-					    			    
-				    </ul><!--//app-menu-->
-			    </nav><!--//app-nav-->
+        <div id="app-sidepanel" class="app-sidepanel">
+            <div id="sidepanel-drop" class="sidepanel-drop"></div>
+            <div class="sidepanel-inner d-flex flex-column">
+                <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+                <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+                    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link" href="index.html">
+                                <span class="nav-icon">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z" />
+                                        <path fill-rule="evenodd"
+                                            d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-text">Overview</span>
+                            </a><!--//nav-link-->
+                        </li><!--//nav-item-->
 
-		       
-	        </div><!--//sidepanel-inner-->
-	    </div><!--//app-sidepanel-->
-    </header><!--//app-header-->		
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link active" href="search.html">
+                                <span class="nav-icon">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                        class="search-mobile-trigger-icon fa-solid fa-magnifying-glass"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-text">Search</span>
+                            </a><!--//nav-link-->
+                        </li><!--//nav-item-->
+                    </ul><!--//app-menu-->
+                </nav><!--//app-nav-->
+            </div><!--//sidepanel-inner-->
+        </div><!--//app-sidepanel-->
+    </header><!--//app-header-->
 
- 
+
     <!-- Javascript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
-<!-- Datepicker JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <!-- Datepicker JS -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
 
-    let startDate = "";
-    let endDate = "";
+        let startDate = "";
+        let endDate = "";
 
-    $(document).ready(function () {
-        $('.datepicker.start-date').datepicker({
-            format: 'yyyy-mm-dd',
-            clearBtn: true,
-        }).on('changeDate', function (event) {
-            startDate = event.target.value;
-            console.log("Start Date:", startDate);
-        });
-    });
-
-    $(document).ready(function () {
-        $('.datepicker.end-date').datepicker({
-            format: 'yyyy-mm-dd',
-            clearBtn: true,
-        }).on('changeDate', function (event) {
-            endDate = event.target.value;
-            console.log("End Date:", endDate);
-        });
-    });
-
-
-    // add function here for elastic search query 
-    function search() {
-        console.log("Search button clicked");
-        console.log(selectedEventOption);
-        console.log(selectedTelescopeOption);
-        console.log(startDate);
-        console.log(endDate);
-
-        // Generate the HTML table dynamically based on the search results
-        const tableBody = document.getElementById("result-table-body");
-        tableBody.innerHTML = "";
-
-        // add query here
-        const url = `http://localhost:3001/search?eventType=${selectedEventOption}&sourceType=${selectedTelescopeOption}&startDate=${startDate}&endDate=${endDate}`;
-        fetch(url)
-            .then((response) => response.json())
-            .then((results) => {
-                console.log(results.length);
-                results.forEach((result) => {
-                    console.log(result);
-                    const row = document.createElement("tr");
-
-                    const eventTypeCell = document.createElement("td");
-                    eventTypeCell.textContent = result.event;
-                    row.appendChild(eventTypeCell);
-
-                    const eventNameCell = document.createElement("td");
-                    eventNameCell.textContent = result.name;
-                    row.appendChild(eventNameCell);
-
-                    const dateAndTimeCell = document.createElement("td");
-                    dateAndTimeCell.textContent = result.date;
-                    row.appendChild(dateAndTimeCell);
-
-                    const raCell = document.createElement("td");
-                    raCell.textContent = result.ra;
-                    row.appendChild(raCell);
-
-                    const decCell = document.createElement("td");
-                    decCell.textContent = result.dec;
-                    row.appendChild(decCell);
-
-                    const sourceCell = document.createElement("td");
-                    sourceCell.textContent = result.source;
-                    row.appendChild(sourceCell);
-
-                    const urgencyCell = document.createElement("td");
-                    urgencyCell.textContent = result.urgency;
-                    if (result.urgency <= 3){
-                        urgencyCell.style.color = "green";
-                    }else{
-                        urgencyCell.style.color = "red";
-                    }
-                    row.appendChild(urgencyCell);
-
-                    tableBody.appendChild(row);
-                });
-            })
-            .catch((error) => {
-                console.error('Error while fetching search results:', error);
+        $(document).ready(function () {
+            $('.datepicker.start-date').datepicker({
+                format: 'yyyy-mm-dd',
+                clearBtn: true,
+            }).on('changeDate', function (event) {
+                startDate = event.target.value;
+                console.log("Start Date:", startDate);
             });
+        });
 
-        // // Example search results (Replace this with your actual search results from ElasticSearch)
-        // const searchResults = [
-        //     {
-        //         eventType: "GRB",
-        //         eventName: "GRB Event 1",
-        //         dateAndTime: "2023-07-09 12:34:56",
-        //         ra: "12h 34m 56s",
-        //         dec: "+45° 23' 12''",
-        //         source: "Telescope A",
-        //         urgency: "4"
-        //     },
-        //     {
-        //         eventType: "Apparent Brightness Rise",
-        //         eventName: "Rise Event 1",
-        //         dateAndTime: "2023-07-09 14:22:36",
-        //         ra: "23h 45m 17s",
-        //         dec: "-15° 09' 28''",
-        //         source: "Telescope B",
-        //         urgency: "5"
-        //     },
-        //     {
-        //         eventType: "Apparent Brightness Rise",
-        //         eventName: "Rise Event 1",
-        //         dateAndTime: "2023-07-09 14:22:36",
-        //         ra: "23h 45m 17s",
-        //         dec: "-15° 09' 28''",
-        //         source: "Telescope B",
-        //         urgency: "5"
-        //     },
-        //     // Add more search results as needed
-        // ];
+        $(document).ready(function () {
+            $('.datepicker.end-date').datepicker({
+                format: 'yyyy-mm-dd',
+                clearBtn: true,
+            }).on('changeDate', function (event) {
+                endDate = event.target.value;
+                console.log("End Date:", endDate);
+            });
+        });
 
-        // print size of search results
-        // console.log("Number of search results:", searchResults.length);
+        function search() {
+            console.log("Search button clicked");
+            console.log(selectedEventOption);
+            console.log(selectedTelescopeOption);
+            console.log(startDate);
+            console.log(endDate);
 
-        // // Generate the HTML table dynamically based on the search results
-        // const tableBody = document.getElementById("result-table-body");
-        // tableBody.innerHTML = "";
+            // Generate the HTML table dynamically based on the search results
+            const tableBody = document.getElementById("result-table-body");
+            tableBody.innerHTML = "";
 
-        // searchResults.forEach(result => {
-        //     const row = document.createElement("tr");
+            const url = `http://localhost:3001/search?eventType=${selectedEventOption}&sourceType=${selectedTelescopeOption}&startDate=${startDate}&endDate=${endDate}`;
+            fetch(url)
+                .then((response) => response.json())
+                .then((results) => {
+                    console.log(results.length);
+                    results.forEach((result) => {
+                        console.log(result);
+                        const row = document.createElement("tr");
 
-        //     const eventTypeCell = document.createElement("td");
-        //     eventTypeCell.textContent = result.eventType;
-        //     row.appendChild(eventTypeCell);
+                        const eventTypeCell = document.createElement("td");
+                        eventTypeCell.textContent = result.event;
+                        row.appendChild(eventTypeCell);
 
-        //     const eventNameCell = document.createElement("td");
-        //     eventNameCell.textContent = result.eventName;
-        //     row.appendChild(eventNameCell);
+                        const eventNameCell = document.createElement("td");
+                        eventNameCell.textContent = result.name;
+                        row.appendChild(eventNameCell);
 
-        //     const dateAndTimeCell = document.createElement("td");
-        //     dateAndTimeCell.textContent = result.dateAndTime;
-        //     row.appendChild(dateAndTimeCell);
+                        const dateAndTimeCell = document.createElement("td");
+                        dateAndTimeCell.textContent = result.date;
+                        row.appendChild(dateAndTimeCell);
 
-        //     const raCell = document.createElement("td");
-        //     raCell.textContent = result.ra;
-        //     row.appendChild(raCell);
+                        const raCell = document.createElement("td");
+                        raCell.textContent = result.ra;
+                        row.appendChild(raCell);
 
-        //     const decCell = document.createElement("td");
-        //     decCell.textContent = result.dec;
-        //     row.appendChild(decCell);
+                        const decCell = document.createElement("td");
+                        decCell.textContent = result.dec;
+                        row.appendChild(decCell);
 
-        //     const sourceCell = document.createElement("td");
-        //     sourceCell.textContent = result.source;
-        //     row.appendChild(sourceCell);
+                        const sourceCell = document.createElement("td");
+                        sourceCell.textContent = result.source;
+                        row.appendChild(sourceCell);
 
-        //     const urgencyCell = document.createElement("td");
-        //     urgencyCell.textContent = result.urgency;
-        //     row.appendChild(urgencyCell);
+                        const urgencyCell = document.createElement("td");
+                        urgencyCell.textContent = result.urgency;
+                        if (result.urgency <= 3) {
+                            urgencyCell.style.color = "green";
+                        } else {
+                            urgencyCell.style.color = "red";
+                        }
+                        row.appendChild(urgencyCell);
 
-        //     tableBody.appendChild(row);
-        // });
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error while fetching search results:', error);
+                });
+        }
+    </script>
 
-    }
-</script>
+    <!-- Javascript -->
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Charts JS -->
+    <script src="assets/plugins/chart.js/chart.min.js"></script>
+    <script src="assets/js/index-charts.js"></script>
+    <!-- Page Specific JS -->
+    <script src="assets/js/app.js"></script>
 
-<!-- Javascript -->
-<script src="assets/plugins/popper.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<!-- Charts JS -->
-<script src="assets/plugins/chart.js/chart.min.js"></script>
-<script src="assets/js/index-charts.js"></script>
-<!-- Page Specific JS -->
-<script src="assets/js/app.js"></script>
+    <!-- Search JS -->
+    <script>
+        let selectedEventOption = "All";
+        function updateSelectedEventOption(option) {
+            document.getElementById("event-type-dropdown-button").innerText = option;
+            selectedEventOption = option;
+            console.log(selectedEventOption);
+        }
 
-<!-- Search JS -->
-<script>
-    let selectedEventOption = "All";
-    function updateSelectedEventOption(option) {
-        document.getElementById("event-type-dropdown-button").innerText = option;
-        selectedEventOption = option;
-        console.log(selectedEventOption);
-    }
-    
-
-</script>
-<script>
-    let selectedTelescopeOption = "All";
-    function updateSelectedTelescopeOption(option) {
-        document.getElementById("telescope-dropdown-button").innerText = option;
-        selectedTelescopeOption = option;
-        console.log(selectedTelescopeOption);
-    }
-</script>
-    
-
+    </script>
+    <script>
+        let selectedTelescopeOption = "All";
+        function updateSelectedTelescopeOption(option) {
+            document.getElementById("telescope-dropdown-button").innerText = option;
+            selectedTelescopeOption = option;
+            console.log(selectedTelescopeOption);
+        }
+    </script>
 </body>
-</html> 
 
+</html>
