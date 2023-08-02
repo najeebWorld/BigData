@@ -2,7 +2,11 @@
 
 ## Introduction
 
-Big data processing systems are at the forefront of technological challenges in recent years. In the business world, the ability to turn the masses of data stored operationally from a burden into an asset that enables risk management and decision-making based on insights learned from this data is a central task in modern corporate management. In scientific fields such as medical or astronomical research, fields characterized by the accumulation of data and information at rates that are orders of magnitude greater than their processing capacity, methods, technologies, and infrastructures are required that deal with the challenges in a way that allows supporting the needs of users and researchers efficiently and quickly. In this project, we will design a system fed by relays alerting to astronomical events, presenting them in real-time (NRT) or at a daily update level, storing and enabling research and search, as well as finding patterns using machine learning as a bonus.
+Big data processing systems are at the forefront of technological challenges in recent years. In the business world, the ability to turn the masses of data stored operationally from a burden into an asset that enables risk management and decision-making based on insights learned from this data is a central task in modern corporate management.
+
+In scientific fields such as medical or astronomical research, fields characterized by the accumulation of data and information at rates that are orders of magnitude greater than their processing capacity, methods, technologies, and infrastructures are required that deal with the challenges in a way that allows supporting the needs of users and researchers efficiently and quickly.
+
+In this project, we will design a system fed by relays alerting to astronomical events, presenting them in real-time (NRT) or at a daily update level, storing and enabling research and search, as well as finding patterns using machine learning as a bonus.
 
 ## Features
 
