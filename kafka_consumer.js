@@ -69,7 +69,7 @@ async function indexDocument(message) {
             index: 'space',
             body: indexedDoc,
         });
-        console.log(`Document indexed successfully. ID: ${response.body._id}`);
+        console.log(`Document indexed successfully`);
     } catch (error) {
         console.error('Error indexing document:', error);
     }
